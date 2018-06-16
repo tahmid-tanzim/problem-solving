@@ -16,3 +16,8 @@ ng-pay.iml
 deploy
 
 *.class
+
+Python/*.py
+Python/*.txt
+Python/*.zip
+Python/*.java
