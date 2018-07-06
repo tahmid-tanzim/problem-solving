@@ -8,3 +8,5 @@ go env
 cd /Users/tanzim/Developer/HackkerRank/Golang/go-kickstart/src/palindrome
 go install
 ```
+How to Write Go Code
+https://golang.org/doc/code.html
