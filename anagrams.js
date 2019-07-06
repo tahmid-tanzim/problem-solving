@@ -16,7 +16,9 @@ function anagrams(a, b) {
     return a.length + b.length - (common * 2);
 }
 
-function main() {
-    var a = readLine().split('').sort(), b = readLine().split('').sort();
+//function main() {
+//    var a = readLine().split('').sort(), b = readLine().split('').sort();
+//    var a = 'bleat'.split('').sort(), b = 'table'.split('').sort();
+    var a = 'eat'.split('').sort(), b = 'tar'.split('').sort();
     console.log(anagrams(a, b));
-}
+//}
