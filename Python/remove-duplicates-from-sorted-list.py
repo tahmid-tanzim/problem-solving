@@ -9,13 +9,16 @@ class ListNode:
 
 
 def delete_duplicates(head):
+    if head is None:
+        return None
+
     h = head
     while h.next is not None:
         if h.val == h.next.val:
             h.next = h.next.next if h.next.next is not None else None
         else:
             h = h.next
-    return h
+    return head
 
 
 if __name__ == '__main__':
@@ -23,7 +26,7 @@ if __name__ == '__main__':
 
     node_head = None
     pointer = ListNode(None)
-    for i in [1, 1, 2, 3, 3]:
+    for i in [1, 1, 1]:
         pointer.next = ListNode(i)
         if node_head is None:
             node_head = pointer.next
@@ -31,6 +34,6 @@ if __name__ == '__main__':
 
     j = delete_duplicates(node_head)
     # j = head
-    # while j is not None:
-    #     print(j.val)
-    #     j = j.next
+    while j is not None:
+        print(j.val)
+        j = j.next
