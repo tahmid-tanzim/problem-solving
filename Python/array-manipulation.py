@@ -6,6 +6,75 @@ def array_manipulation(n, queries):
     operations_dictionary = [
         [(1, n), 0]
     ]
+    max_val = 0
+    for a, b, k in queries:
+        i = 0
+        index = 0
+        updated_operations, deleted_operations = [], []
+        while i < len(operations_dictionary):
+            [(lower, upper), total] = operations_dictionary[i]
+            if a <= b < lower <= upper:
+                break
+            if lower <= a <= b <= upper:  # (a & b) In-between lower & upper boundary
+                index = i
+                deleted_operations.append([(lower, upper), total])
+                if a == lower and b == upper:
+                    updated_operations.append([(lower, upper), total + k])
+                    max_val = max(max_val, total + k)
+                if lower == a and b < upper:
+                    upper_diff = upper - b
+                    updated_operations.append([(a, b), total + k])
+                    updated_operations.append([(upper - upper_diff + 1, upper), total])
+                    max_val = max(max_val, total + k)
+                if lower < a and b == upper:
+                    lower_diff = a - lower
+                    updated_operations.append([(lower, lower + lower_diff - 1), total])
+                    updated_operations.append([(a, b), total + k])
+                    max_val = max(max_val, total + k)
+                if lower < a <= b < upper:
+                    lower_diff = a - lower
+                    upper_diff = upper - b
+                    updated_operations.append([(lower, lower + lower_diff - 1), total])
+                    updated_operations.append([(a, b), total + k])
+                    updated_operations.append([(upper - upper_diff + 1, upper), total])
+                    max_val = max(max_val, total + k)
+                # print(i, "SE (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
+            else:  # (a & b) Outside lower & upper boundary
+                if lower <= a <= upper < b:
+                    index = i
+                    deleted_operations.append([(lower, upper), total])
+                    if lower == a:  # == upper
+                        updated_operations.append([(lower, upper), total + k])
+                        max_val = max(max_val, total + k)
+                    if lower < a <= upper:
+                        lower_diff = a - lower
+                        updated_operations.append([(lower, lower + lower_diff - 1), total])
+                        updated_operations.append([(a, upper), total + k])
+                        max_val = max(max_val, total + k)
+                    # print(i, "S (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
+                if a < lower <= upper < b:
+                    deleted_operations.append([(lower, upper), total])
+                    updated_operations.append([(lower, upper), total + k])
+                    max_val = max(max_val, total + k)
+                    # print(i, "M (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
+                if a < lower <= b <= upper:
+                    deleted_operations.append([(lower, upper), total])
+                    if lower == b == upper:
+                        updated_operations.append([(lower, upper), total + k])
+                        max_val = max(max_val, total + k)
+                    if lower <= b < upper:
+                        upper_diff = upper - b
+                        updated_operations.append([(lower, b), total + k])
+                        updated_operations.append([(upper - upper_diff + 1, upper), total])
+                        max_val = max(max_val, total + k)
+                    # print(i, "E (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
+            i += 1
+        # print('deleted_operations: ', deleted_operations, index)
+        # print('updated_operations: ', updated_operations, index)
+        del operations_dictionary[index:len(deleted_operations) + index]
+        operations_dictionary[index:index] = updated_operations
+        # print('operations_dictionary: ', operations_dictionary, max_val)
+    return max_val
 
 
 # def array_manipulation(n, queries):
@@ -31,22 +100,19 @@ if __name__ == '__main__':
     #     [6, 9, 1]
     # ]))  # 10
 
-    # print(array_manipulation(10, [
-    #     [2, 6, 8],
-    #     [3, 5, 7],
-    #     [1, 8, 1],
-    #     [5, 9, 15]
-    # ]))  # 31
+    print(array_manipulation(10, [
+        [2, 6, 8],
+        [3, 5, 7],
+        [1, 8, 1],
+        [5, 9, 15]
+    ]))  # 31
 
-    operations_dictionary = [
-        [(1, 3), 3],
-        [(4, 7), 10],
-        [(8, 11), 7],
-        [(12, 15), 0]
-        # ,
-        # [(16, 17), 1],
-        # [(18, 18), 2]
-    ]
+    # operations_dictionary = [
+    #     [(1, 3), 3],
+    #     [(4, 7), 10],
+    #     [(8, 11), 7],
+    #     [(12, 15), 0]
+    # ]
 
     '''
     Delete 
@@ -83,60 +149,60 @@ if __name__ == '__main__':
     #
     # print(operations_dictionary)
 
-    i = 0
-    a = 7
-    b = 9
-    k = 4
-    index = 0
-    updated_operations, deleted_operations = [], []
-    while i < len(operations_dictionary):
-        [(lower, upper), total] = operations_dictionary[i]
-        if a <= b < lower <= upper:
-            break
-        if lower <= a <= b <= upper:  # (a & b) In-between lower & upper boundary
-            index = i
-            deleted_operations.append([(lower, upper), total])
-            if a == lower and b == upper:
-                updated_operations.append([(lower, upper), total + k])
-            if lower == a and b < upper:
-                upper_diff = upper - b
-                updated_operations.append([(a, b), total + k])
-                updated_operations.append([(upper - upper_diff + 1, upper), total])
-            if lower < a and b == upper:
-                lower_diff = a - lower
-                updated_operations.append([(lower, lower + lower_diff - 1), total])
-                updated_operations.append([(a, b), total + k])
-            if lower < a <= b < upper:
-                lower_diff = a - lower
-                upper_diff = upper - b
-                updated_operations.append([(lower, lower + lower_diff - 1), total])
-                updated_operations.append([(a, b), total + k])
-                updated_operations.append([(upper - upper_diff + 1, upper), total])
-            print(i, "SE (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
-        else:  # (a & b) Outside lower & upper boundary
-            if lower <= a <= upper < b:
-                index = i
-                deleted_operations.append([(lower, upper), total])
-                if lower == a == upper:
-                    updated_operations.append([(lower, upper), total + k])
-                if lower < a <= upper:
-                    lower_diff = a - lower
-                    updated_operations.append([(lower, lower + lower_diff - 1), total])
-                    updated_operations.append([(a, upper), total + k])
-                print(i, "S (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
-            if a < lower <= upper < b:
-                deleted_operations.append([(lower, upper), total])
-                updated_operations.append([(lower, upper), total + k])
-                print(i, "M (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
-            if a < lower <= b <= upper:
-                deleted_operations.append([(lower, upper), total])
-                if lower == b == upper:
-                    updated_operations.append([(lower, upper), total + k])
-                if lower <= b < upper:
-                    upper_diff = upper - b
-                    updated_operations.append([(lower, b), total + k])
-                    updated_operations.append([(upper - upper_diff + 1, upper), total])
-                print(i, "E (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
-        i += 1
-    print('deleted_operations: ', deleted_operations, index)
-    print('updated_operations: ', updated_operations, index)
+    # i = 0
+    # a = 7
+    # b = 9
+    # k = 4
+    # index = 0
+    # updated_operations, deleted_operations = [], []
+    # while i < len(operations_dictionary):
+    #     [(lower, upper), total] = operations_dictionary[i]
+    #     if a <= b < lower <= upper:
+    #         break
+    #     if lower <= a <= b <= upper:  # (a & b) In-between lower & upper boundary
+    #         index = i
+    #         deleted_operations.append([(lower, upper), total])
+    #         if a == lower and b == upper:
+    #             updated_operations.append([(lower, upper), total + k])
+    #         if lower == a and b < upper:
+    #             upper_diff = upper - b
+    #             updated_operations.append([(a, b), total + k])
+    #             updated_operations.append([(upper - upper_diff + 1, upper), total])
+    #         if lower < a and b == upper:
+    #             lower_diff = a - lower
+    #             updated_operations.append([(lower, lower + lower_diff - 1), total])
+    #             updated_operations.append([(a, b), total + k])
+    #         if lower < a <= b < upper:
+    #             lower_diff = a - lower
+    #             upper_diff = upper - b
+    #             updated_operations.append([(lower, lower + lower_diff - 1), total])
+    #             updated_operations.append([(a, b), total + k])
+    #             updated_operations.append([(upper - upper_diff + 1, upper), total])
+    #         print(i, "SE (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
+    #     else:  # (a & b) Outside lower & upper boundary
+    #         if lower <= a <= upper < b:
+    #             index = i
+    #             deleted_operations.append([(lower, upper), total])
+    #             if lower == a == upper:
+    #                 updated_operations.append([(lower, upper), total + k])
+    #             if lower < a <= upper:
+    #                 lower_diff = a - lower
+    #                 updated_operations.append([(lower, lower + lower_diff - 1), total])
+    #                 updated_operations.append([(a, upper), total + k])
+    #             print(i, "S (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
+    #         if a < lower <= upper < b:
+    #             deleted_operations.append([(lower, upper), total])
+    #             updated_operations.append([(lower, upper), total + k])
+    #             print(i, "M (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
+    #         if a < lower <= b <= upper:
+    #             deleted_operations.append([(lower, upper), total])
+    #             if lower == b == upper:
+    #                 updated_operations.append([(lower, upper), total + k])
+    #             if lower <= b < upper:
+    #                 upper_diff = upper - b
+    #                 updated_operations.append([(lower, b), total + k])
+    #                 updated_operations.append([(upper - upper_diff + 1, upper), total])
+    #             print(i, "E (a:{}, b: {})  lower: {} | upper {} | total {}".format(a, b, lower, upper, total))
+    #     i += 1
+    # print('deleted_operations: ', deleted_operations, index)
+    # print('updated_operations: ', updated_operations, index)
