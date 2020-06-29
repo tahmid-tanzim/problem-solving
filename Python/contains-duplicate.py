@@ -1,16 +1,26 @@
 #!/Users/tahmid.tanzim/venv/bin/python3.7
 # https://leetcode.com/problems/contains-duplicate/
+# https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/578/
+
+# def contains_duplicate(nums):
+#     i = 0
+#     mapper = {}
+#     while i < len(nums):
+#         if nums[i] in mapper:
+#             return True
+#         else:
+#             mapper[nums[i]] = 1
+#         i += 1
+#     return False
 
 
 def contains_duplicate(nums):
-    i = 0
     mapper = {}
-    while i < len(nums):
-        if nums[i] in mapper:
+    for n in nums:
+        if n in mapper:
             return True
         else:
-            mapper[nums[i]] = 1
-        i += 1
+            mapper[n] = 1
     return False
 
 
