@@ -6,9 +6,10 @@ def two_sum(nums, target):
     i, s = 0, len(nums)
     while i < s:
         r = target - nums[i]
-        t = nums[:i] + nums[i + 1:]
-        if r in t:
-            return [i, t.index(r)]
+        if r in nums:
+            j = nums.index(r)
+            if i != j:
+                return [i, j]
         i += 1
 
 
