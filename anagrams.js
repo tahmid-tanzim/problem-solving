@@ -19,6 +19,6 @@ function anagrams(a, b) {
 //function main() {
 //    var a = readLine().split('').sort(), b = readLine().split('').sort();
 //    var a = 'bleat'.split('').sort(), b = 'table'.split('').sort();
-    var a = 'eat'.split('').sort(), b = 'tar'.split('').sort();
+    var a = "rat".split('').sort(), b = "car".split('').sort();
     console.log(anagrams(a, b));
 //}
