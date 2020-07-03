@@ -22,10 +22,9 @@ def is_anagram(s, t):
                 return False
 
     return True
-    # return True if sum(hash_table.values()) == 0 else False
 
 
 if __name__ == '__main__':
-    # print(is_anagram(s="anagram", t="nagaram"))  # True
-    # print(is_anagram(s="rat", t="car"))  # False
+    print(is_anagram(s="anagram", t="nagaram"))  # True
+    print(is_anagram(s="rat", t="car"))  # False
     print(is_anagram(s="aacc", t="ccac"))  # False
