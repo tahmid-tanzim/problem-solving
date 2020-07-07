@@ -22,6 +22,20 @@ def reverse_list(head):
     return output
 
 
+# def reverse_list(head):
+#     if head is None:
+#         return head
+#
+#     output = ListNode(head.val)
+#     head = head.next
+#     while head is not None:
+#         temp = ListNode(head.val)
+#         temp.next = output
+#         output = temp
+#         head = head.next
+#     return output
+
+
 if __name__ == '__main__':
     l1 = ListNode(1)
     l2 = ListNode(2)

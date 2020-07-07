@@ -17,5 +17,5 @@ deploy
 
 *.class
 
-Python/*.txt
-Python/*.zip
+war-and-peace/*.txt
+war-and-peace/*.zip
