@@ -41,6 +41,7 @@ def peek(stack):
     return None
 
 
+# using 2 stack
 def postorder_traversal_iterative(root):
     if root is None:
         return
