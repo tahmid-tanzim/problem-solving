@@ -29,7 +29,7 @@ def create_binary_tree(array):
 
 
 # BFS Approach
-def bfs(root):
+def level_order_bottom(root):
     level_order = []
     if root is None:
         return level_order
@@ -56,4 +56,4 @@ if __name__ == "__main__":
     # tree_array = [1, 2, 3, 4, 5, None, 6, 7, None, None, None, None, None, None, 8]
     # tree_array = [2, 1, 3]
     root_node = create_binary_tree(tree_array)
-    print(bfs(root_node))
+    print(level_order_bottom(root_node))

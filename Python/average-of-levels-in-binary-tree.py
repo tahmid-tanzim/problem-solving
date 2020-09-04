@@ -1,5 +1,5 @@
 #!/usr/local/bin/python3
-# https://leetcode.com/problems/binary-tree-level-order-traversal/
+# https://leetcode.com/problems/average-of-levels-in-binary-tree/
 
 
 class TreeNode:
@@ -29,7 +29,7 @@ def create_binary_tree(array):
 
 
 # BFS Approach
-def level_order_top(root):
+def average_of_levels(root):
     if root is None:
         return []
     queue = [(root, 0)]
@@ -47,7 +47,7 @@ def level_order_top(root):
             queue.append((li, level,))
         if ri is not None:
             queue.append((ri, level,))
-    return level_order
+    return [sum(row) / len(row) for row in level_order]
 
 
 if __name__ == "__main__":
@@ -56,4 +56,4 @@ if __name__ == "__main__":
     # tree_array = [1, 2, 3, 4, 5, None, 6, 7, None, None, None, None, None, None, 8]
     # tree_array = [2, 1, 3]
     root_node = create_binary_tree(tree_array)
-    print(level_order_top(root_node))
+    print(average_of_levels(root_node))
