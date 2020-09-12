@@ -20,7 +20,7 @@ memoization_table = list()
 
 
 # Method 1: Recursion.
-def is_subset_sum(arr: list, total: int, n: int) -> bool:
+def is_subset_sum(arr: list, n: int, total: int) -> bool:
     # Base Condition
     if total == 0:
         return True
@@ -33,17 +33,43 @@ def is_subset_sum(arr: list, total: int, n: int) -> bool:
 
     # Choice Diagram
     if arr[n - 1] <= total:
-        include = is_subset_sum(arr, total - arr[n - 1], n - 1)
-        exclude = is_subset_sum(arr, total, n - 1)
+        include = is_subset_sum(arr, n - 1, total - arr[n - 1])
+        exclude = is_subset_sum(arr, n - 1, total)
         memoization_table[n][total] = include or exclude
         return memoization_table[n][total]
     else:
-        exclude = is_subset_sum(arr, total, n - 1)
+        exclude = is_subset_sum(arr, n - 1, total)
         memoization_table[n][total] = exclude
         return memoization_table[n][total]
 
 
-# Method 2: To solve the problem in Pseudo-polynomial time use the Dynamic programming.
+# Method 2: Top Down
+def is_subset_sum_2(arr: list, n: int, total: int) -> bool:
+    matrix = [[None for _ in range(total + 1)] for _ in range(n + 1)]
+    r = 0
+    while r <= n:
+        matrix[r][0] = True
+        r += 1
+    c = 1
+    while c <= total:
+        matrix[0][c] = False
+        c += 1
+
+    r = 1
+    while r <= n:
+        c = 1
+        while c <= total:
+            if arr[r - 1] <= c:
+                include = matrix[r - 1][c - arr[r - 1]]
+                exclude = matrix[r - 1][c]
+                matrix[r][c] = include or exclude
+            else:
+                matrix[r][c] = matrix[r - 1][c]
+            c += 1
+        r += 1
+    return matrix[n][total]
+
+
 if __name__ == "__main__":
     subset_sum_inputs = (
         {
@@ -63,5 +89,6 @@ if __name__ == "__main__":
 
     for i in subset_sum_inputs:
         memoization_table = [[None for _ in range(i['total'] + 1)] for _ in range(i['n'] + 1)]
-        o = is_subset_sum(i['arr'], i['total'], i['n'])
+        o = is_subset_sum(i['arr'], i['n'], i['total'])
+        # o = is_subset_sum_2(i['arr'], i['n'], i['total'])
         print(f'Expected Output - {i["output"]}\nOriginal Output - {o}', end='\n\n')

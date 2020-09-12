@@ -14,6 +14,7 @@
 memoization_table = list()
 
 
+# Method 1: Recursion.
 def knapsack_recursive(value: list, weight: list, w: int, n: int) -> int:
     """
     Recursive Function
@@ -38,6 +39,7 @@ def knapsack_recursive(value: list, weight: list, w: int, n: int) -> int:
         return memoization_table[n][w]
 
 
+# Method 2: Top Down.
 def knapsack_top_down(value: list, weight: list, w: int, n: int) -> int:
     """
     Top Down
