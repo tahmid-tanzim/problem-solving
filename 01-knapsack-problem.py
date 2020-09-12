@@ -9,30 +9,33 @@
 # Top Down
 """
 
+# row ~> n
+# col ~> w
+memoization_table = list()
 
-def knapsack_recursive(value: list, weight: list, w: int, n: int, table: list) -> int:
+
+def knapsack_recursive(value: list, weight: list, w: int, n: int) -> int:
     """
     Recursive Function
     """
-    print(w, n)
     # Base Condition
     if w == 0 or n == 0:
         return 0
 
     # Memoization
-    if table[n][w] != -1:
-        return table[n][w]
+    if memoization_table[n][w] != -1:
+        return memoization_table[n][w]
 
     # Choice Diagram
     if weight[n - 1] <= w:
-        include = value[n - 1] + knapsack_recursive(value, weight, w - weight[n - 1], n - 1, table)
-        discard = knapsack_recursive(value, weight, w, n - 1, table)
-        table[n][w] = max(include, discard)
-        return table[n][w]
+        include = value[n - 1] + knapsack_recursive(value, weight, w - weight[n - 1], n - 1)
+        exclude = knapsack_recursive(value, weight, w, n - 1)
+        memoization_table[n][w] = max(include, exclude)
+        return memoization_table[n][w]
     elif weight[n - 1] > w:
-        discard = knapsack_recursive(value, weight, w, n - 1, table)
-        table[n][w] = discard
-        return table[n][w]
+        exclude = knapsack_recursive(value, weight, w, n - 1)
+        memoization_table[n][w] = exclude
+        return memoization_table[n][w]
 
 
 def knapsack_top_down(value: list, weight: list, w: int, n: int) -> int:
@@ -40,15 +43,16 @@ def knapsack_top_down(value: list, weight: list, w: int, n: int) -> int:
     Top Down
     """
     # Initialize with Base Condition
-    # table = [[-1] * (w + 1)] * (n + 1)
-    table = [[-1 for _ in range(w + 1)] for _ in range(n + 1)]
+    # Don't initialize Matrix like this
+    # matrix = [[-1] * (w + 1)] * (n + 1)
+    matrix = [[-1 for _ in range(w + 1)] for _ in range(n + 1)]
     r = 0
     while r <= n:
-        table[r][0] = 0
+        matrix[r][0] = 0
         r += 1
     c = 1
     while c <= w:
-        table[0][c] = 0
+        matrix[0][c] = 0
         c += 1
 
     r = 1
@@ -56,16 +60,16 @@ def knapsack_top_down(value: list, weight: list, w: int, n: int) -> int:
         c = 1
         while c <= w:
             if weight[r - 1] <= c:
-                include = value[r - 1] + table[r - 1][c - weight[r - 1]]
-                discard = table[r - 1][c]
-                table[r][c] = max(include, discard)
+                include = value[r - 1] + matrix[r - 1][c - weight[r - 1]]
+                exclude = matrix[r - 1][c]
+                matrix[r][c] = max(include, exclude)
             else:
-                discard = table[r - 1][c]
-                table[r][c] = discard
+                exclude = matrix[r - 1][c]
+                matrix[r][c] = exclude
             c += 1
         r += 1
 
-    return table[n][w]
+    return matrix[n][w]
 
 
 if __name__ == "__main__":
@@ -94,8 +98,7 @@ if __name__ == "__main__":
     )
 
     for i in inputs:
-        # t = [[-1] * (i['w'] + 1)] * (i['n'] + 1)
-        # t = [[-1 for x in range(i['w'] + 1)] for y in range(i['n'] + 1)]
-        # o = knapsack_recursive(i['value'], i['weight'], i['w'], i['n'], t)
+        memoization_table = [[-1 for x in range(i['w'] + 1)] for y in range(i['n'] + 1)]
+        # o = knapsack_recursive(i['value'], i['weight'], i['w'], i['n'])
         o = knapsack_top_down(i['value'], i['weight'], i['w'], i['n'])
         print(f'Expected Output - {i["output"]}\nOriginal Output - {o}', end='\n\n')
