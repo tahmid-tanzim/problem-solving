@@ -11,7 +11,7 @@
 
 # row ~> n
 # col ~> w
-memoization_table = list()
+memoization_table = list()  # n x m
 
 
 # Method 1: Recursion.
@@ -41,17 +41,15 @@ def knapsack_recursive(value: list, weight: list, w: int, n: int) -> int:
 
 # Method 2: Top Down.
 def knapsack_top_down(value: list, weight: list, w: int, n: int) -> int:
-    """
-    Top Down
-    """
     # Initialize with Base Condition
-    # Don't initialize Matrix like this
-    # matrix = [[-1] * (w + 1)] * (n + 1)
+    # Don't initialize Matrix like this ~> matrix = [[-1] * (w + 1)] * (n + 1)
     matrix = [[-1 for _ in range(w + 1)] for _ in range(n + 1)]
+
     r = 0
     while r <= n:
         matrix[r][0] = 0
         r += 1
+
     c = 1
     while c <= w:
         matrix[0][c] = 0
