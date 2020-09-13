@@ -13,17 +13,21 @@
 5. Target Sum DP
 6. Number of Subset by a given Difference
 """
+from typing import List
 
 
 class SubsetSum:
-    def __init__(self, row: int, col: int) -> None:
+    def __init__(self) -> None:
+        self.memoization_table = None
+
+    def set_memoization_table(self, row: int, col: int) -> None:
         # row ~> n = 6
         # col ~> total = 30
         # n x total
         self.memoization_table = [[None for _ in range(col + 1)] for _ in range(row + 1)]
 
     # Method 1: Recursion.
-    def is_subset_sum(self, arr: list, n: int, total: int) -> bool:
+    def is_subset_sum(self, arr: List[int], n: int, total: int) -> bool:
         # Base Condition
         if total == 0:
             return True
@@ -46,7 +50,7 @@ class SubsetSum:
             return self.memoization_table[n][total]
 
     # Method 2: Top Down
-    def is_subset_sum_2(self, arr: list, n: int, total: int) -> bool:
+    def is_subset_sum_2(self, arr: List[int], n: int, total: int) -> bool:
         matrix = [[None for _ in range(total + 1)] for _ in range(n + 1)]
 
         # Initialize with Base Condition
@@ -75,6 +79,10 @@ class SubsetSum:
         return matrix[n][total]
 
 
+class EqualSubsetSumPartition:
+    pass
+
+
 if __name__ == "__main__":
     subset_sum_inputs = (
         {
@@ -93,12 +101,12 @@ if __name__ == "__main__":
     )
 
     for i in subset_sum_inputs:
-        memoization_table = [[None for _ in range(i['total'] + 1)] for _ in range(i['n'] + 1)]
-        ss_rc = SubsetSum(i['n'], i['total'])
+        ss_rc = SubsetSum()
+        ss_rc.set_memoization_table(i['n'], i['total'])
         ss_rc_o = ss_rc.is_subset_sum(i['arr'], i['n'], i['total'])
         print(f'Method 1: Recursion.\nExpected Output - {i["output"]}\nOriginal Output - {ss_rc_o}', end='\n\n')
 
-        ss_td = SubsetSum(i['n'], i['total'])
+        ss_td = SubsetSum()
         ss_td_o = ss_td.is_subset_sum_2(i['arr'], i['n'], i['total'])
         print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {ss_td_o}', end='\n-----------------------\n')
 
