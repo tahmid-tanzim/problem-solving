@@ -28,7 +28,7 @@ class SubsetSum:
         self.memoization_table = [[None for _ in range(col + 1)] for _ in range(row + 1)]
 
     # Method 1: Recursion.
-    def is_subset_sum(self, arr: List[int], n: int, total: int) -> bool:
+    def is_subset_sum(self, nums: List[int], n: int, total: int) -> bool:
         # Base Condition
         if total == 0:
             return True
@@ -40,37 +40,27 @@ class SubsetSum:
             return self.memoization_table[n][total]
 
         # Choice Diagram
-        if arr[n - 1] <= total:
-            include = self.is_subset_sum(arr, n - 1, total - arr[n - 1])
-            exclude = self.is_subset_sum(arr, n - 1, total)
+        if nums[n - 1] <= total:
+            include = self.is_subset_sum(nums, n - 1, total - nums[n - 1])
+            exclude = self.is_subset_sum(nums, n - 1, total)
             self.memoization_table[n][total] = include or exclude
             return self.memoization_table[n][total]
         else:
-            exclude = self.is_subset_sum(arr, n - 1, total)
+            exclude = self.is_subset_sum(nums, n - 1, total)
             self.memoization_table[n][total] = exclude
             return self.memoization_table[n][total]
 
     # Method 2: Top Down
-    def is_subset_sum_2(self, arr: List[int], n: int, total: int) -> bool:
-        matrix = [[None for _ in range(total + 1)] for _ in range(n + 1)]
-
+    def is_subset_sum_2(self, nums: List[int], n: int, total: int) -> bool:
         # Initialize with Base Condition
-        r = 0
-        while r <= n:
-            matrix[r][0] = True
-            r += 1
-
-        c = 1
-        while c <= total:
-            matrix[0][c] = False
-            c += 1
+        matrix = [[True if c == 0 else False for c in range(total + 1)] for _ in range(n + 1)]
 
         r = 1
         while r <= n:
             c = 1
             while c <= total:
-                if arr[r - 1] <= c:
-                    include = matrix[r - 1][c - arr[r - 1]]
+                if nums[r - 1] <= c:
+                    include = matrix[r - 1][c - nums[r - 1]]
                     exclude = matrix[r - 1][c]
                     matrix[r][c] = include or exclude
                 else:
@@ -136,17 +126,7 @@ class EqualSubsetSumPartition:
         total //= 2
 
         # Initialize Matrix
-        matrix = [[None for _ in range(total + 1)] for _ in range(n + 1)]
-
-        r = 0
-        while r <= n:
-            matrix[r][0] = True
-            r += 1
-
-        c = 1
-        while c <= total:
-            matrix[0][c] = False
-            c += 1
+        matrix = [[True if c == 0 else False for c in range(total + 1)] for _ in range(n + 1)]
 
         # Choice Diagram
         r = 1
@@ -165,46 +145,99 @@ class EqualSubsetSumPartition:
         return matrix[n][total]
 
 
+class CountSubsetSum:
+    def __init__(self) -> None:
+        self.memoization_table = None
+
+    def set_memoization_table(self, row: int, col: int) -> None:
+        # row ~> n & col ~> total
+        self.memoization_table = [[None for _ in range(col + 1)] for _ in range(row + 1)]
+
+    # Method 1: Recursion
+    def get_subset_sum_count(self, nums: List[int], n: int, total: int) -> int:
+        # Base Condition
+        if total == 0:
+            return 1
+        if n == 0:
+            return 0
+
+            # Memoization
+        if self.memoization_table[n][total] is not None:
+            return self.memoization_table[n][total]
+
+        # Choice Diagram
+        if nums[n - 1] <= total:
+            include = self.get_subset_sum_count(nums, n - 1, total - nums[n - 1])
+            exclude = self.get_subset_sum_count(nums, n - 1, total)
+            self.memoization_table[n][total] = include + exclude
+            return self.memoization_table[n][total]
+        else:
+            exclude = self.get_subset_sum_count(nums, n - 1, total)
+            self.memoization_table[n][total] = exclude
+            return self.memoization_table[n][total]
+
+    # Method 2: Top Down
+    def count_subset_sum(self, nums: List[int], n: int, total: int) -> int:
+        # Initialize with Base Condition
+        matrix = [[1 if c == 0 else 0 for c in range(total + 1)] for _ in range(n + 1)]
+
+        r = 1
+        while r <= n:
+            c = 1
+            while c <= total:
+                if nums[r - 1] <= c:
+                    include = matrix[r - 1][c - nums[r - 1]]
+                    exclude = matrix[r - 1][c]
+                    matrix[r][c] = include + exclude
+                else:
+                    exclude = matrix[r - 1][c]
+                    matrix[r][c] = exclude
+                c += 1
+            r += 1
+
+        return matrix[n][total]
+
+
 if __name__ == "__main__":
+    print('\n:~: Subset Sum :~:\n')
     subset_sum_inputs = (
         {
-            'arr': [3, 34, 4, 12, 5, 2],
+            'nums': [3, 34, 4, 12, 5, 2],
             'total': 30,
-            'n': 6,
             'output': False,
         },
         {
-            'arr': [3, 34, 4, 12, 5, 2],
+            'nums': [3, 34, 4, 12, 5, 2],
             'total': 9,
-            'n': 6,
             'output': True
         },
-
     )
-    print('\n:~: Subset Sum :~:\n')
+
     for i in subset_sum_inputs:
+        _n = len(i['nums'])
+
         ss_rc = SubsetSum()
-        ss_rc.set_memoization_table(i['n'], i['total'])
-        ss_rc_o = ss_rc.is_subset_sum(i['arr'], i['n'], i['total'])
+        ss_rc.set_memoization_table(_n, i['total'])
+        ss_rc_o = ss_rc.is_subset_sum(i['nums'], _n, i['total'])
         print(f'Method 1: Recursion.\nExpected Output - {i["output"]}\nOriginal Output - {ss_rc_o}', end='\n\n')
 
         ss_td = SubsetSum()
-        ss_td_o = ss_td.is_subset_sum_2(i['arr'], i['n'], i['total'])
+        ss_td_o = ss_td.is_subset_sum_2(i['nums'], _n, i['total'])
         print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {ss_td_o}',
               end='\n-----------------------\n')
 
+    print('\n:~: Equal Subset Sum Partition :~:\n')
     equal_subset_sum_partition_inputs = (
         {
             'nums': [1, 5, 11, 5],
             'output': True,
         },
         {
-            'nums': [1, 2, 3, 5],
+            'nums': [5, 2, 1, 3],
             'output': False
         },
-
     )
-    print('\n:~: Equal Subset Sum Partition :~:\n')
+
     for i in equal_subset_sum_partition_inputs:
         essp_rc = EqualSubsetSumPartition()
         essp_rc_o = essp_rc.is_eq_partition(i['nums'])
@@ -213,4 +246,26 @@ if __name__ == "__main__":
         essp_td = EqualSubsetSumPartition()
         essp_td_o = essp_td.can_partition(i['nums'])
         print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {essp_td_o}',
+              end='\n-----------------------\n')
+
+    print('\n:~: Count Subset Sum :~:\n')
+    count_subset_sum_inputs = (
+        {
+            'nums': [10, 2, 5, 3, 8, 6],
+            'total': 10,
+            'output': 3,
+        },
+    )
+
+    for i in count_subset_sum_inputs:
+        _n = len(i['nums'])
+
+        css_rc = CountSubsetSum()
+        css_rc.set_memoization_table(_n, i['total'])
+        css_rc_o = css_rc.get_subset_sum_count(i['nums'], _n, i['total'])
+        print(f'Method 1: Recursion.\nExpected Output - {i["output"]}\nOriginal Output - {css_rc_o}', end='\n\n')
+
+        css_td = CountSubsetSum()
+        css_td_o = css_rc.count_subset_sum(i['nums'], _n, i['total'])
+        print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {css_td_o}',
               end='\n-----------------------\n')
