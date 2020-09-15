@@ -11,8 +11,8 @@
 2. Equal Subset Sum Partition ~> https://www.youtube.com/watch?v=UmMh7xp07kY
 3. Count of Subset Sum
 4. Minimum Subset Sum Difference
-5. Target Sum DP
-6. Number of Subset by a given Difference
+5. Number of Subset by a given Difference
+6. Target Sum DP
 """
 from typing import List
 
@@ -236,7 +236,6 @@ class MinimumSubsetSumDifference:
         small_subset_vector = [True, True, True, True, False, False]
         """
         small_subset_vector = self.subset_sum(nums, _range // 2)
-        print(small_subset_vector)
 
         """
         3. Find the last index of True 
@@ -253,13 +252,41 @@ class MinimumSubsetSumDifference:
 
 
 class NumberOfSubsetByGivenDifference:
-    """
-    nums = [1, 1, 2, 3]
-    diff = 3
-    Formula: total = (diff + sum(nums)) / 2
-    CountSubsetSum with this total
-    """
-    pass
+    def __init__(self) -> None:
+        self.memoization_table = None
+
+    def set_memoization_table(self, row: int, col: int) -> None:
+        # row ~> n & col ~> total
+        self.memoization_table = [[None for _ in range(col + 1)] for _ in range(row + 1)]
+
+    # Method 1: Recursion
+    def count_subset_sum(self, nums: List[int], n: int, total: int):
+        # Base Condition
+        if total == 0:
+            return 1
+        if n == 0:
+            return 0
+
+        # Memoization
+        if self.memoization_table[n][total] is not None:
+            return self.memoization_table[n][total]
+
+        # Choice Diagram
+        if nums[n - 1] <= total:
+            include = self.count_subset_sum(nums, n - 1, total - nums[n - 1])
+            exclude = self.count_subset_sum(nums, n - 1, total)
+            self.memoization_table[n][total] = include + exclude
+            return self.memoization_table[n][total]
+        else:
+            exclude = self.count_subset_sum(nums, n - 1, total)
+            self.memoization_table[n][total] = exclude
+            return self.memoization_table[n][total]
+
+    def get_number_of_subset_from_diff(self, nums: List[int], diff: int) -> int:
+        n = len(nums)
+        total = (diff + sum(nums)) // 2
+        self.set_memoization_table(n, total)
+        return self.count_subset_sum(nums, n, total)
 
 
 if __name__ == "__main__":
@@ -350,4 +377,19 @@ if __name__ == "__main__":
         mssd_td = MinimumSubsetSumDifference()
         mssd_td_o = mssd_td.min_difference(i['nums'])
         print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {mssd_td_o}',
+              end='\n-----------------------\n')
+
+    print('\n:~: Number of Subset by a given Difference :~:\n')
+    number_of_subset_by_given_diff_inputs = (
+        {
+            'nums': [1, 1, 2, 3],
+            'diff': 1,
+            'output': 3,
+        },
+    )
+
+    for i in number_of_subset_by_given_diff_inputs:
+        nssd_rc = NumberOfSubsetByGivenDifference()
+        nssd_rc_o = nssd_rc.get_number_of_subset_from_diff(i['nums'], i['diff'])
+        print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {nssd_rc_o}',
               end='\n-----------------------\n')
