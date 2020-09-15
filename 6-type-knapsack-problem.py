@@ -252,6 +252,16 @@ class MinimumSubsetSumDifference:
                 return _range - 2 * index
 
 
+class NumberOfSubsetByGivenDifference:
+    """
+    nums = [1, 1, 2, 3]
+    diff = 3
+    Formula: total = (diff + sum(nums)) / 2
+    CountSubsetSum with this total
+    """
+    pass
+
+
 if __name__ == "__main__":
     print('\n:~: Subset Sum :~:\n')
     subset_sum_inputs = (
