@@ -4,7 +4,7 @@
 
 """
 # Dynamic Programming
-# 0/1 Knapsack
+# 0/1 Knapsack | unbounded knapsack | fractional Greedy
 # Memoization
 # Top Down
 """

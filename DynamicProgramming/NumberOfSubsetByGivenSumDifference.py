@@ -1,7 +1,7 @@
 from typing import List
 
 
-class NumberOfSubsetByGivenDifference:
+class NumberOfSubsetByGivenSumDifference:
     def __init__(self) -> None:
         self.memoization_table = None
 

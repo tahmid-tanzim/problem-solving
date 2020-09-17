@@ -251,7 +251,7 @@ class MinimumSubsetSumDifference:
                 return _range - 2 * index
 
 
-class NumberOfSubsetByGivenDifference:
+class NumberOfSubsetByGivenSumDifference:
     def __init__(self) -> None:
         self.memoization_table = None
 
@@ -260,7 +260,7 @@ class NumberOfSubsetByGivenDifference:
         self.memoization_table = [[None for _ in range(col + 1)] for _ in range(row + 1)]
 
     # Method 1: Recursion
-    def count_subset_sum(self, nums: List[int], n: int, total: int):
+    def count_subset_sum(self, nums: List[int], n: int, total: int) -> int:
         # Base Condition
         if total == 0:
             return 1
@@ -289,18 +289,58 @@ class NumberOfSubsetByGivenDifference:
         return self.count_subset_sum(nums, n, total)
 
 
+class TargetSum:
+    # Method 2: Top Down
+    def count_subset_sum(self, nums: List[int], n: int, total: int) -> int:
+        # Initialize
+        matrix = [[0 for _ in range(total + 1)] for _ in range(n + 1)]
+        matrix[0][0] = 1
+        for k, v in enumerate(nums):
+            if v == 0:
+                matrix[k + 1][0] = 2 * matrix[k][0]
+            else:
+                matrix[k + 1][0] = matrix[k][0]
+
+        r = 1
+        while r <= n:
+            c = 1
+            while c <= total:
+                if nums[r - 1] <= c:
+                    include = matrix[r - 1][c - nums[r - 1]]
+                    exclude = matrix[r - 1][c]
+                    matrix[r][c] = include + exclude
+                else:
+                    matrix[r][c] = matrix[r - 1][c]
+                c += 1
+            r += 1
+
+        return matrix[n][total]
+
+    def find_target_sum_ways(self, nums: List[int], s: int) -> int:
+        n = len(nums)
+        if n == 0:
+            return 0
+
+        sum_of_nums = sum(nums)
+        if sum_of_nums < s or (sum_of_nums + s) % 2 != 0:
+            return 0
+
+        total = (s + sum_of_nums) // 2
+        return self.count_subset_sum(nums, n, total)
+
+
 if __name__ == "__main__":
     print('\n:~: Subset Sum :~:\n')
     subset_sum_inputs = (
         {
             'nums': [3, 34, 4, 12, 5, 2],
             'total': 30,
-            'output': False,
+            'expected': False,
         },
         {
             'nums': [3, 34, 4, 12, 5, 2],
             'total': 9,
-            'output': True
+            'expected': True
         },
     )
 
@@ -310,33 +350,33 @@ if __name__ == "__main__":
         ss_rc = SubsetSum()
         ss_rc.set_memoization_table(_n, i['total'])
         ss_rc_o = ss_rc.is_subset_sum(i['nums'], _n, i['total'])
-        print(f'Method 1: Recursion.\nExpected Output - {i["output"]}\nOriginal Output - {ss_rc_o}', end='\n\n')
+        print(f'Method 1: Recursion.\nExpected Output - {i["expected"]}\nOriginal Output - {ss_rc_o}', end='\n\n')
 
         ss_td = SubsetSum()
         ss_td_o = ss_td.is_subset_sum_2(i['nums'], _n, i['total'])
-        print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {ss_td_o}',
+        print(f'Method 2: Top Down.\nExpected Output - {i["expected"]}\nOriginal Output - {ss_td_o}',
               end='\n-----------------------\n')
 
     print('\n:~: Equal Subset Sum Partition :~:\n')
     equal_subset_sum_partition_inputs = (
         {
             'nums': [1, 5, 11, 5],
-            'output': True,
+            'expected': True,
         },
         {
             'nums': [5, 2, 1, 3],
-            'output': False
+            'expected': False
         },
     )
 
     for i in equal_subset_sum_partition_inputs:
         essp_rc = EqualSubsetSumPartition()
         essp_rc_o = essp_rc.is_eq_partition(i['nums'])
-        print(f'Method 1: Recursion.\nExpected Output - {i["output"]}\nOriginal Output - {essp_rc_o}', end='\n\n')
+        print(f'Method 1: Recursion.\nExpected Output - {i["expected"]}\nOriginal Output - {essp_rc_o}', end='\n\n')
 
         essp_td = EqualSubsetSumPartition()
         essp_td_o = essp_td.can_partition(i['nums'])
-        print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {essp_td_o}',
+        print(f'Method 2: Top Down.\nExpected Output - {i["expected"]}\nOriginal Output - {essp_td_o}',
               end='\n-----------------------\n')
 
     print('\n:~: Count Subset Sum :~:\n')
@@ -344,7 +384,7 @@ if __name__ == "__main__":
         {
             'nums': [10, 2, 5, 3, 8, 6],
             'total': 10,
-            'output': 3,
+            'expected': 3,
         },
     )
 
@@ -354,29 +394,29 @@ if __name__ == "__main__":
         css_rc = CountSubsetSum()
         css_rc.set_memoization_table(_n, i['total'])
         css_rc_o = css_rc.get_subset_sum_count(i['nums'], _n, i['total'])
-        print(f'Method 1: Recursion.\nExpected Output - {i["output"]}\nOriginal Output - {css_rc_o}', end='\n\n')
+        print(f'Method 1: Recursion.\nExpected Output - {i["expected"]}\nOriginal Output - {css_rc_o}', end='\n\n')
 
         css_td = CountSubsetSum()
         css_td_o = css_rc.count_subset_sum(i['nums'], _n, i['total'])
-        print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {css_td_o}',
+        print(f'Method 2: Top Down.\nExpected Output - {i["expected"]}\nOriginal Output - {css_td_o}',
               end='\n-----------------------\n')
 
     print('\n:~: Minimum Subset Sum Difference :~:\n')
     min_subset_sum_diff_inputs = (
         {
             'nums': [1, 6, 11, 5],
-            'output': 1,
+            'expected': 1,
         },
         {
             'nums': [1, 2, 7],
-            'output': 4,
+            'expected': 4,
         },
     )
 
     for i in min_subset_sum_diff_inputs:
         mssd_td = MinimumSubsetSumDifference()
         mssd_td_o = mssd_td.min_difference(i['nums'])
-        print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {mssd_td_o}',
+        print(f'Method 2: Top Down.\nExpected Output - {i["expected"]}\nOriginal Output - {mssd_td_o}',
               end='\n-----------------------\n')
 
     print('\n:~: Number of Subset by a given Difference :~:\n')
@@ -384,12 +424,43 @@ if __name__ == "__main__":
         {
             'nums': [1, 1, 2, 3],
             'diff': 1,
-            'output': 3,
+            'expected': 3,
         },
     )
 
     for i in number_of_subset_by_given_diff_inputs:
-        nssd_rc = NumberOfSubsetByGivenDifference()
+        nssd_rc = NumberOfSubsetByGivenSumDifference()
         nssd_rc_o = nssd_rc.get_number_of_subset_from_diff(i['nums'], i['diff'])
-        print(f'Method 2: Top Down.\nExpected Output - {i["output"]}\nOriginal Output - {nssd_rc_o}',
+        print(f'Method 1: Top Down.\nExpected Output - {i["expected"]}\nOriginal Output - {nssd_rc_o}',
+              end='\n-----------------------\n')
+
+    print('\n:~: Target Sum :~:')
+    print(':~: TargetSum == NumberOfSubsetByGivenSumDifference :~:\n')
+    target_sum_inputs = (
+        {
+            'nums': [1, 1, 2, 3],
+            'target': 1,
+            'expected': 3,
+        },
+        {
+            'nums': [1, 1, 1, 1, 1],
+            'target': 3,
+            'expected': 5
+        },
+        {
+            'nums': [1],
+            'target': 2,
+            'expected': 0
+        },
+        {
+            'nums': [0, 0, 1],
+            'target': 1,
+            'expected': 4
+        },
+    )
+
+    for i in target_sum_inputs:
+        ts_rc = TargetSum()
+        ts_rc_o = ts_rc.find_target_sum_ways(i['nums'], i['target'])
+        print(f'Method 1: Top Down.\nExpected Output - {i["expected"]}\nOriginal Output - {ts_rc_o}',
               end='\n-----------------------\n')
