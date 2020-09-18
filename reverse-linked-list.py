@@ -22,18 +22,16 @@ def reverse_list(head):
     return output
 
 
-# def reverse_list(head):
-#     if head is None:
-#         return head
-#
-#     output = ListNode(head.val)
-#     head = head.next
-#     while head is not None:
-#         temp = ListNode(head.val)
-#         temp.next = output
-#         output = temp
-#         head = head.next
-#     return output
+def reverse_list_recursion(node):
+    if node is None:
+        return None
+    if node.next is None:
+        return node
+
+    head_node = reverse_list_recursion(node.next)
+    node.next.next = node
+    node.next = None
+    return head_node
 
 
 if __name__ == '__main__':
@@ -50,7 +48,7 @@ if __name__ == '__main__':
     l4.next = l5
     # l5.next = l6
 
-    j = reverse_list(l1)
+    j = reverse_list_recursion(l1)
     while j is not None:
         print(j.val)
         j = j.next
