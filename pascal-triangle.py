@@ -1,5 +1,5 @@
 import math
-
+from typing import List
 
 class Solution:
     def prevSum(self, i: int, j: int) -> int:

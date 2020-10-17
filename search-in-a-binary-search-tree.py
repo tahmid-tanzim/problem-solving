@@ -8,6 +8,9 @@ class TreeNode:
         self.left = None
         self.right = None
 
+    def __str__(self):
+        return f'Node val - {self.val}'
+
 
 def searchBST(root: TreeNode, val: int) -> TreeNode:
     if root is None:
@@ -35,4 +38,4 @@ if __name__ == '__main__':
     r.right = n7
 
     subtree_root = searchBST(r, 2)
-    print('LAST: ', subtree_root)
+    print('Result - ', subtree_root)
