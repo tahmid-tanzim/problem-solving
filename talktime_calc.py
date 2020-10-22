@@ -1,31 +1,26 @@
 #!/usr/local/bin/python3
-# from datetime import datetime
 
 
 def get_slot(time, is_start_time=True):
     if 0 <= time < 360:
-        delta = 360 - time if is_start_time else time
-        return 1, delta
+        return 1, 360 - time if is_start_time else time
     elif 360 <= time < 720:
-        delta = 720 - time if is_start_time else time - 360
-        return 2, delta
+        return 2, 720 - time if is_start_time else time - 360
     elif 720 <= time < 1080:
-        delta = 1080 - time if is_start_time else time - 720
-        return 3, delta
+        return 3, 1080 - time if is_start_time else time - 720
     else:
-        delta = 1440 - time if is_start_time else time - 1080
-        return 4, delta
+        return 4, 1440 - time if is_start_time else time - 1080
 
 
 def get_talk_time(start, end):
     call_charge = 0
-    start_date_str, start_time = start.split(' ')
-    end_date_str, end_time = end.split(' ')
+    start_date_str, start_time_str = start.split(' ')
+    end_date_str, end_time_str = end.split(' ')
 
     s_year, s_month, s_day = tuple(map(int, start_date_str.split('-')))
+    s_hour, s_minute, s_second = tuple(map(int, start_time_str.split(':')))
     e_year, e_month, e_day = tuple(map(int, end_date_str.split('-')))
-    s_hour, s_minute, s_second = tuple(map(int, start_time.split(':')))
-    e_hour, e_minute, e_second = tuple(map(int, end_time.split(':')))
+    e_hour, e_minute, e_second = tuple(map(int, end_time_str.split(':')))
 
     # print(s_year, s_month, s_day)
     # print(e_year, e_month, e_day)
@@ -40,7 +35,6 @@ def get_talk_time(start, end):
         print('Calculate Call Charge in Middle Days - ', call_charge)
 
     # Calculate Call Charge in Time
-
     # Check IF Remaining FULL DAY
     if s_hour == e_hour and s_minute == e_minute:
         call_charge += 24 * 60 * 2.5
@@ -55,12 +49,16 @@ def get_talk_time(start, end):
 
         print('Start - ', start_rate, start_fraction_time)
         print('End - ', end_rate, end_fraction_time)
-        if start_time > end_time and start_rate == end_rate:
-            call_charge += (24 * 60 * 2.5) - (delta_time * start_rate)  # e.g. s 8 e 7
-            print('same slot (start_time > end_time) - ', call_charge)
-        elif start_time <= end_time and start_rate == end_rate:
-            call_charge += delta_time * start_rate
-            print('same slot (start_time <= end_time) - ', call_charge)
+
+        if start_rate == end_rate:
+            if start_time > end_time:
+                # e.g. start time  8:00 | end time 7:00
+                call_charge += (24 * 60 * 2.5) - (delta_time * start_rate)
+                print('same slot (start_time > end_time) - ', call_charge)
+            else:
+                # e.g. start time  7:00 | end time 8:00
+                call_charge += delta_time * start_rate
+                print('same slot (start_time <= end_time) - ', call_charge)
         else:
             if start_rate > end_rate:
                 # START -> 00:00
@@ -96,6 +94,6 @@ def get_talk_time(start, end):
 
 
 if __name__ == "__main__":
-    start_datetime = '2020-10-01 21:00:00'
-    end_datetime = '2020-10-03 11:00:00'
+    start_datetime = '2020-10-01 07:00:00'
+    end_datetime = '2020-10-02 08:00:00'
     print(f'BDT {get_talk_time(start_datetime, end_datetime)}')
