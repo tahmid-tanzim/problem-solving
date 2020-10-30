@@ -4,32 +4,53 @@
 
 
 def merge_two_array(nums1, m, nums2, n):
-    p = 0
-    q = 0
-    shift_pointer = m
-    while q < n:
-        while p < m + n:
-            if nums1[p] == 0 and p >= shift_pointer:
-                nums1[p] = nums2[q]
-                p += 1
-                shift_pointer += 1
-                break
-            if nums2[q] < nums1[p]:
-                backlog = nums2[q]
-                i = p
-                while i < m + n:
-                    temp = nums1[i]
-                    nums1[i] = backlog
-                    if temp == 0 and i >= shift_pointer:
-                        break
-                    backlog = temp
-                    i += 1
-                shift_pointer += 1
-                p += 1
-                break
-            p += 1
-        q += 1
+    last = len(nums1) - 1
+    i = m - 1
+    j = n - 1
+
+    while i >= 0 and j >= 0:
+        if nums1[i] > nums2[j]:
+            nums1[last] = nums1[i]
+            i -= 1
+        else:
+            nums1[last] = nums2[j]
+            j -= 1
+        last -= 1
+
+    while j >= 0:
+        nums1[last] = nums2[j]
+        j -= 1
+        last -= 1
     return nums1
+
+
+# def merge_two_array(nums1, m, nums2, n):
+#     p = 0
+#     q = 0
+#     shift_pointer = m
+#     while q < n:
+#         while p < m + n:
+#             if nums1[p] == 0 and p >= shift_pointer:
+#                 nums1[p] = nums2[q]
+#                 p += 1
+#                 shift_pointer += 1
+#                 break
+#             if nums2[q] < nums1[p]:
+#                 backlog = nums2[q]
+#                 i = p
+#                 while i < m + n:
+#                     temp = nums1[i]
+#                     nums1[i] = backlog
+#                     if temp == 0 and i >= shift_pointer:
+#                         break
+#                     backlog = temp
+#                     i += 1
+#                 shift_pointer += 1
+#                 p += 1
+#                 break
+#             p += 1
+#         q += 1
+#     return nums1
 
 
 if __name__ == '__main__':
