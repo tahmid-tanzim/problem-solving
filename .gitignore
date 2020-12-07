@@ -3,6 +3,7 @@
 # Logs
 logs
 *.log
+*.pyc
 
 # Dependency directories
 node_modules
