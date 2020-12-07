@@ -1,24 +1,33 @@
 #!/usr/local/bin/python3
 
-from sys import maxsize 
-
-# Time Complexity - O(n * m)
 def smallestDifference(arrayOne, arrayTwo):
-    minDiff = maxsize
+    minDiff = float("inf")
+    output = []
     i = 0
     j = 0
-	while i < len(arrayOne) and j < len(arrayTwo):
-		x, y = arrayOne[i], arrayTwo[j]
-		currentDiff = abs(x - y)
-		if currentDiff < minDiff:
-			minDiff = currentDiff
-			output = [x, y]
-		
-		if x < y:
-			i += 1
-		if y <= x:
-			j += 1
-	return output
+
+    arrayOne.sort()
+    arrayTwo.sort()
+
+    while i < len(arrayOne) and j < len(arrayTwo):
+        first_val = arrayOne[i]
+        second_val = arrayTwo[j]
+
+        if first_val < second_val:
+            currentDiff = abs(second_val - first_val)
+            i += 1
+        elif second_val < first_val:
+            currentDiff = abs(first_val - second_val)
+            j += 1
+        else:
+            return [first_val, second_val]
+
+        if currentDiff < minDiff:
+            minDiff = currentDiff
+            output = [first_val, second_val]
+
+    return output
+
 
 if __name__ == "__main__":
-   print(smallestDifference([], [])) 
+    print(smallestDifference([- 1, 5, 10, 20, 28, 3], [26, 134, 135, 15, 17]))
