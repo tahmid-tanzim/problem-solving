@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 
 
-def unique_paths(m: int, n: int, memo: dict = {}) -> int:
+def unique_paths(m: int, n: int, memo: dict) -> int:
     # Base Case
     if m == 0 or n == 0:
         return 0
@@ -19,4 +19,4 @@ def unique_paths(m: int, n: int, memo: dict = {}) -> int:
 
 
 if __name__ == "__main__":
-    print(unique_paths(2, 3))
+    print(unique_paths(2, 3, {}))
