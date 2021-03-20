@@ -57,5 +57,9 @@ if __name__ == "__main__":
     # print(multiply_recursive(4, 5))
     # print(exp_recursive(5, 3))
     # print(recursive_str_length('My Name is'))
-    print(show_middle_recursive([1, 2, 5, 7, 10, 13, 14, 15, 22]))
+    # print(show_middle_recursive([1, 2, 5, 7, 10, 13, 14, 15, 22]))
     # print(show_middle_recursive([]))
+
+    t = [2, 0, 1, 4, 3, 3]
+    for i, v in enumerate(t):
+        print(f'Index - {i} & Value - {v}')
