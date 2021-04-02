@@ -4,9 +4,9 @@ from Node import Node
 
 
 class Graph:
-    def __init__(self, adjacency_list=[]):
+    def __init__(self, adjacency_list=[], state=None):
         noOfNodes = len(adjacency_list)
-        nodes = [Node(name) for name in range(noOfNodes)]
+        nodes = [Node(name, [], state) for name in range(noOfNodes)]
         for node in nodes:
             for childIdx in adjacency_list[node.getName()]:
                 node.addChildren(nodes[childIdx])
