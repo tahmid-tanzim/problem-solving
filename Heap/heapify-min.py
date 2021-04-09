@@ -16,10 +16,10 @@ def shiftDownMinHeap(array, i, n):
     while left_index < n and right_index < n:
         if array[left_index] >= array[right_index] and array[right_index] < array[i]:
             array[i], array[right_index] = array[right_index], array[i]
-            i = left_index
+            i = right_index
         elif array[right_index] > array[left_index] and array[left_index] < array[i]:
             array[i], array[left_index] = array[left_index], array[i]
-            i = right_index
+            i = left_index
         else:
             break
         left_index = 2 * i + 1
