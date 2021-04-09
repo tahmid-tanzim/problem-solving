@@ -55,6 +55,10 @@ So the Time Complexity of deleting a value from MAX or MIN Heap is minimum `O(1)
 ## 4. Heapify
 Heapify is a process of creating a Heap from end
 *Time Completion* of heapify if `O(n)`
+```python3
+array = [10, 20, 15, 12, 40, 25, 18]
+```
+For Max Heap, from last index to 0 check if children NOT exists then its considered as Heap. Else if children exists then adjust with children (shift down) until the sub tree is Max / Min Heap.
 
 
 ## 5. Priority Queue
