@@ -16,9 +16,6 @@ class Solution:
         # Base Case
         if iStart >= iEnd or i >= n:
             return
-        # if iStart == iEnd - 1:
-        #     [value] = inorder[iStart:iEnd]
-        #     return TreeNode(value)
 
         # Find Root Node
         rootValue = None
@@ -28,7 +25,6 @@ class Solution:
                 i = x
                 break
 
-        # if rootValue is not None:
         rootIdx = inorder.index(rootValue)
         root = TreeNode(rootValue)
         root.left = self.constructBT(preorder, i, n, inorder, iStart, rootIdx)
@@ -42,9 +38,8 @@ class Solution:
 def order(node):
     if node is None:
         return
-
-    order(node.left)
     print(node.val, end='-')
+    order(node.left)
     order(node.right)
 
 
