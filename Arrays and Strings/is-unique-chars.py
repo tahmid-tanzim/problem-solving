@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# CTCI - 1.1
+# Cracking the Coding Interview - 1.1
 
 def isUniqueChars(s):
     checker = 0

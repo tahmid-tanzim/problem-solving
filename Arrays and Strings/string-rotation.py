@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# CTCI - 1.9
+# Cracking the Coding Interview - 1.9
 
 
 def isSubstring(string: str, sub: str):

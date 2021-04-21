@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# CTCI - 1.3
+# Cracking the Coding Interview - 1.3
 from typing import List
 
 
