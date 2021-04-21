@@ -44,6 +44,6 @@ def replaceSpacesFromString(string: str, trueLength: int) -> str:
 
 
 if __name__ == '__main__':
-    # output1 = replaceSpaces(list("Mr John Smith       "), 13)
-    output1 = replaceSpacesFromString("Mr John Smith       ", 13)
-    print(f'{output1}')
+    # output = replaceSpaces(list("Mr John Smith       "), 13)
+    output = replaceSpacesFromString("Mr John Smith       ", 13)
+    print(f'{output}')

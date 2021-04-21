@@ -14,8 +14,6 @@ def isUniqueChars(s):
 
 
 if __name__ == '__main__':
-    output1 = isUniqueChars("asdertysg")
-    print(f'{output1}')
+    output = isUniqueChars("asdertysg")
+    print(f'{output}')
 
-    # for i in range(1, 11):
-    #     print(i, i << i)
