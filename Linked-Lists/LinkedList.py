@@ -24,11 +24,23 @@ class LinkedList:
             current_node = current_node.next
         return output + 'NULL'
 
+    def __eq__(self, array) -> bool:
+        current_node = self.head
+        while current_node is not None:
+            data = array.pop(0)
+            if current_node.data != data:
+                return False
+            current_node = current_node.next
+        return len(array) == 0
+
     def __get__(self):
         return self.head
 
-    def appendToTail(self, d) -> None:
-        last_node = Node(d)
+    def __set__(self, head):
+        self.head = head
+
+    def appendToTail(self, val) -> None:
+        last_node = Node(val)
         if self.head is None:
             self.head = last_node
             return
@@ -38,17 +50,17 @@ class LinkedList:
             current_node = current_node.next
         current_node.next = last_node
 
-    def deleteNode(self, d) -> bool:
+    def deleteNode(self, val) -> bool:
         if self.head is None:
             return False
 
-        if self.head.data == d:
+        if self.head.data == val:
             self.head = self.head.next
             return True
 
         current_node = self.head
         while current_node.next is not None:
-            if current_node.next.data == d:
+            if current_node.next.data == val:
                 current_node.next = current_node.next.next
                 return True
             current_node = current_node.next
