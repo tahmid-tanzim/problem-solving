@@ -2,7 +2,17 @@
 """
 LinkedList - 2.3. Delete Middle Node
 """
-from LinkedList import LinkedList
+from LinkedList import LinkedList, Node
+
+
+def removeNode(node: Node) -> bool:
+    if node is None or node.next is None:
+        return False
+
+    nextNode: Node = node.next
+    node.data = nextNode.data
+    node.data = nextNode.next
+    return True
 
 
 if __name__ == "__main__":
