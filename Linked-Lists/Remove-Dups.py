@@ -23,6 +23,26 @@ def removeDuplicate(node: Node):
             node = node.next
 
 
+def deleteDuplicate(node: Node):
+    """
+    Without Hash Table
+    O(n^2) time
+    O(1) space
+    """
+    if node is None:
+        return
+
+    current = node
+    while current is not None:
+        runner = current
+        while runner.next is not None:
+            if runner.next.data == current.data:
+                runner.next = runner.next.next
+            else:
+                runner = runner.next
+        current = current.next
+
+
 if __name__ == "__main__":
     TEST_CASES = (
         {
@@ -52,7 +72,8 @@ if __name__ == "__main__":
         for val in testCase["input"]:
             ll.appendToTail(val)
 
-        removeDuplicate(ll.__get__())
+        # removeDuplicate(ll.__get__())
+        deleteDuplicate(ll.__get__())
 
         if ll == testCase["output"]:
             print(f'TEST #{testCase["id"]} PASSED')
