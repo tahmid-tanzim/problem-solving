@@ -72,8 +72,8 @@ if __name__ == "__main__":
         for val in testCase["input"]:
             ll.appendToTail(val)
 
-        # removeDuplicate(ll.__get__())
-        deleteDuplicate(ll.__get__())
+        removeDuplicate(ll.__get__())
+        # deleteDuplicate(ll.__get__())
 
         if ll == testCase["output"]:
             print(f'TEST #{testCase["id"]} PASSED')

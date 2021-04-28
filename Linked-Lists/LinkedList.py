@@ -70,3 +70,19 @@ class LinkedList:
             current_node = current_node.next
 
         return False
+
+    def deleteMiddle(self):
+        if self.head is None:
+            return
+
+        if self.head.next is None or self.head.next.next is None:
+            self.head = self.head.next
+            return
+
+        fast = self.head
+        slow = None
+        while fast.next is not None and fast.next.next is not None:
+            fast = fast.next.next
+            slow = self.head if slow is None else slow.next
+
+        slow.next = slow.next.next

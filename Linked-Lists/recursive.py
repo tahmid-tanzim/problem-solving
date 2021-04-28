@@ -29,6 +29,3 @@ if __name__ == "__main__":
 
     printASC(ll.__get__())
     printDESC(ll.__get__(), 0)
-
-
-
