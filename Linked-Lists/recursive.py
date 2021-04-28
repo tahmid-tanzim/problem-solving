@@ -2,10 +2,10 @@
 """
 Traverse LinkedList Recursively
 """
-from LinkedList import LinkedList
+from LinkedList import LinkedList, Node
 
 
-def printASC(node):
+def printASC(node: Node) -> None:
     if node is None:
         print('NULL', end='\n')
         return
@@ -14,7 +14,7 @@ def printASC(node):
     printASC(node.next)
 
 
-def printDESC(node, stack):
+def printDESC(node: Node, stack: int) -> None:
     if node is None:
         return
 

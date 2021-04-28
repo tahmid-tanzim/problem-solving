@@ -1,8 +1,10 @@
 #!/usr/bin/python3
+from typing import List
+
 
 class Node:
-    def __init__(self, d):
-        self.data = d
+    def __init__(self, data: int):
+        self.data = data
         self.next = None
 
     def __str__(self):
@@ -13,7 +15,7 @@ class Node:
 
 
 class LinkedList:
-    def __init__(self, head=None):
+    def __init__(self, head: Node = None):
         self.head = head
 
     def __repr__(self):
@@ -24,22 +26,24 @@ class LinkedList:
             current_node = current_node.next
         return output + 'NULL'
 
-    def __eq__(self, array) -> bool:
+    def __eq__(self, array: List[int]) -> bool:
+        i = 0
+        n = len(array)
         current_node = self.head
         while current_node is not None:
-            data = array.pop(0)
-            if current_node.data != data:
+            if i >= n or current_node.data != array[i]:
                 return False
             current_node = current_node.next
-        return len(array) == 0
+            i += 1
+        return i == n
 
     def __get__(self):
         return self.head
 
-    def __set__(self, head):
+    def __set__(self, head: Node):
         self.head = head
 
-    def appendToTail(self, val) -> None:
+    def appendToTail(self, val: int) -> None:
         last_node = Node(val)
         if self.head is None:
             self.head = last_node
@@ -50,7 +54,7 @@ class LinkedList:
             current_node = current_node.next
         current_node.next = last_node
 
-    def deleteNode(self, val) -> bool:
+    def deleteNode(self, val: int) -> bool:
         if self.head is None:
             return False
 
@@ -66,6 +70,3 @@ class LinkedList:
             current_node = current_node.next
 
         return False
-
-
-
