@@ -8,8 +8,27 @@ i.e.
 from LinkedList import LinkedList, Node
 
 
+def kthLast(head: Node, k: int):
+    """
+    Iterative Solution
+    O(n) time
+    O(1) space
+    """
+    p1 = p2 = head
+    for i in range(k):
+        if p1 is None:
+            return dict(data=None)
+        p1 = p1.next
+
+    while p1 is not None:
+        p1 = p1.next
+        p2 = p2.next
+    return dict(data=p2.data)
+
+
 def kthToLast(node: Node, k: int):
     """
+    Recursive Solution
     O(n) time
     O(n) space
     """
@@ -51,7 +70,7 @@ if __name__ == "__main__":
         for val in testCase["input"]:
             ll.appendToTail(val)
 
-        o = kthToLast(ll.__get__(), testCase["k"])
+        o = kthLast(ll.__get__(), testCase["k"])
 
         if o["data"] == testCase["output"]:
             print(f'TEST #{testCase["id"]} PASSED')
