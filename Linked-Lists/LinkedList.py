@@ -54,6 +54,16 @@ class LinkedList:
             current_node = current_node.next
         current_node.next = last_node
 
+    def appendNodeToTail(self, last_node: Node) -> None:
+        if self.head is None:
+            self.head = last_node
+            return
+
+        current_node = self.head
+        while current_node.next is not None:
+            current_node = current_node.next
+        current_node.next = last_node
+
     def deleteNode(self, val: int) -> bool:
         if self.head is None:
             return False
