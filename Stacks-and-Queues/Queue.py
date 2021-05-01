@@ -31,7 +31,7 @@ class Queue:
 
     def peek(self):
         if self.__start is None:
-            raise NoSuchElementException('Stack is empty')
+            raise NoSuchElementException('Queue is empty')
         return self.__start.data
 
     def isEmpty(self):
