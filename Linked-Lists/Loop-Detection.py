@@ -47,15 +47,15 @@ if __name__ == "__main__":
     for testCase in TEST_CASES:
         head = tail = loopStartNode = None
         for i in testCase["input"]:
-            new_node = Node(i)
+            newNode = Node(i)
             if testCase["loopStart"] == i:
-                loopStartNode = new_node
+                loopStartNode = newNode
 
             if head is None:
-                head = tail = new_node
+                head = tail = newNode
             else:
-                tail.next = new_node
-                tail = new_node
+                tail.next = newNode
+                tail = newNode
 
         if loopStartNode is not None:
             tail.next = loopStartNode

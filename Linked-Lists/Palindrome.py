@@ -15,7 +15,7 @@ class ReverseAndCompare:
     def __init__(self, h=None):
         self.head = h
 
-    def _reverseAndClone(self) -> Node:
+    def __reverseAndClone(self) -> Node:
         current_node = self.head
         reversed_head: Node = None
         while current_node is not None:
@@ -27,7 +27,7 @@ class ReverseAndCompare:
 
     def isPalindrome(self) -> bool:
         current_node = self.head
-        reversed_node: Node = self._reverseAndClone()
+        reversed_node: Node = self.__reverseAndClone()
         while current_node is not None and reversed_node is not None:
             if current_node.data != reversed_node.data:
                 return False
@@ -67,6 +67,48 @@ class IterativeApproach:
         return True
 
 
+class RecursiveApproach:
+    """
+    Solution 3
+    O(n) time
+    O(n) space
+    """
+    def __init__(self, h=None):
+        self.head = h
+
+    def __lengthOfList(self) -> int:
+        size = 0
+        node = self.head
+        while node is not None:
+            size += 1
+            node = node.next
+        return size
+
+    def __palindromeRecurse(self, head: Node, length: int) -> dict:
+        if head is None or length <= 0:
+            return dict(node=head, result=True)
+        elif length == 1:
+            return dict(node=head.next, result=True)
+
+        # Recurse of sublist.
+        response = self.__palindromeRecurse(head.next, length - 2)
+
+        # If child calls are not a palindrome pass back up a failure
+        if not response["result"] or response["node"] is None:
+            return response
+
+        return dict(
+            # Return corresponding node
+            node=response["node"].next,
+            # Check if matches corresponding node on other side.
+            result=head.data == response["node"].data
+        )
+
+    def isPalindrome(self) -> bool:
+        length: int = self.__lengthOfList()
+        return self.__palindromeRecurse(self.head, length)["result"]
+
+
 if __name__ == "__main__":
     TEST_CASES = [
         {
@@ -85,7 +127,7 @@ if __name__ == "__main__":
             "output": False
         },
         {
-            "id": 5,
+            "id": 4,
             "input": [1, 2, 3, 4, 2, 1, 1],
             "output": False
         }
@@ -94,16 +136,17 @@ if __name__ == "__main__":
     for testCase in TEST_CASES:
         head = tail = None
         for i in testCase["input"]:
-            new_node = Node(i)
+            newNode = Node(i)
             if head is None:
-                head = tail = new_node
+                head = tail = newNode
             else:
-                tail.next = new_node
-                tail = new_node
+                tail.next = newNode
+                tail = newNode
 
         objects = (
             ReverseAndCompare(head),
             IterativeApproach(head),
+            RecursiveApproach(head),
         )
 
         for obj in objects:
