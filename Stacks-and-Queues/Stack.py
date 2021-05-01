@@ -1,0 +1,32 @@
+#!/usr/bin/python3
+from Node import Node
+
+
+class EmptyStackException(Exception):
+    """Raised when the stack is empty"""
+    pass
+
+
+class Stack:
+    def __init__(self, top: Node = None):
+        self.__top = top
+
+    def push(self, data: int) -> None:
+        new_node = Node(data)
+        new_node.next = self.__top
+        self.__top = new_node
+
+    def pop(self) -> Node:
+        if self.__top is None:
+            raise EmptyStackException('Stack is empty.')
+        data = self.__top.data
+        self.__top = self.__top.next
+        return data
+
+    def peek(self):
+        if self.__top is None:
+            raise EmptyStackException('Stack is empty')
+        return self.__top.data
+
+    def isEmpty(self):
+        return self.__top is None
