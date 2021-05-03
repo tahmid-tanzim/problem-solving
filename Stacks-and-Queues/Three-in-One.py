@@ -2,9 +2,9 @@
 """
 Stacks and Queues - 3.1. Three in One
 """
+import unittest
 from typing import List
 from stack_exceptions import FullStackException, EmptyStackException, StackIndexOutOfRangeException
-import unittest
 
 
 class FixedMultiStack:
