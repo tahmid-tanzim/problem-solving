@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+Stacks and Queues - 3.2.
+"""
 from Node import Node
 from Stack import Stack
 

@@ -8,7 +8,7 @@ class Fibonacci():
 
     def series(self, upto):
         while self.b < upto:
-            yield(self.b)
+            yield self.b
             self.a, self.b = self.b, self.a + self.b
 
 

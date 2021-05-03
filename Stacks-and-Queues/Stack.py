@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 from Node import Node
-
-
-class EmptyStackException(Exception):
-    """Raised when the stack is empty"""
-    pass
+from stack_exceptions import EmptyStackException
 
 
 class Stack:
