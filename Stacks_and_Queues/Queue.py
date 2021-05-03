@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 from Node import Node
-
-
-class NoSuchElementException(Exception):
-    """Raised when the stack is empty"""
-    pass
+from stack_exceptions import NoSuchElementException
 
 
 class Queue:

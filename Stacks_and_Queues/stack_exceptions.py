@@ -14,3 +14,8 @@ class EmptyStackException(Exception):
 class StackIndexOutOfRangeException(Exception):
     """Raised when the stack index is out of bound"""
     pass
+
+
+class NoSuchElementException(Exception):
+    """Raised when the stack is empty"""
+    pass
