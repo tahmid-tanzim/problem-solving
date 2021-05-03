@@ -26,8 +26,8 @@ def join(above: Node, below: Node):
 class Stack:
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.top: Node = None
-        self.bottom: Node = None
+        self.top = None
+        self.bottom = None
         self.size: int = 0
 
     def isFull(self):
@@ -97,11 +97,7 @@ class SetOfStacks:
 
     def leftShift(self, index, removeTop):
         stack = self.stacks[index]
-        removed_item = None
-        if removeTop:
-            removed_item = stack.pop()
-        else:
-            removed_item = stack.removeBottom()
+        removed_item = stack.pop() if removeTop else stack.removeBottom()
 
         if stack.isEmpty():
             self.stacks = self.stacks[:index] + self.stacks[index + 1:]
@@ -128,16 +124,10 @@ class TestSetOfStacks(unittest.TestCase):
         for i in range(1, 6):
             self.sos.push(i)
 
-        val = self.sos.pop()
-        self.assertEqual(val, 5)
-        val = self.sos.pop()
-        self.assertEqual(val, 4)
-        val = self.sos.pop()
-        self.assertEqual(val, 3)
-        val = self.sos.pop()
-        self.assertEqual(val, 2)
-        val = self.sos.pop()
-        self.assertEqual(val, 1)
+        for i in range(5, 0, -1):
+            val = self.sos.pop()
+            self.assertEqual(val, i)
+
         with self.assertRaises(EmptyStackException) as context:
             val = self.sos.pop()
             self.assertEqual('Stack is empty', str(context.exception))
