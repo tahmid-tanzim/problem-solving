@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-from Stack import Stack
-from Queue import Queue
+from StackDS import Stack
+from QueueDS import Queue
 
 
 if __name__ == "__main__":

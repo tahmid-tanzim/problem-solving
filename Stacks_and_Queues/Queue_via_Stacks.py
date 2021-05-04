@@ -2,7 +2,7 @@
 """
 Stacks and Queues - 3.4. Queue via Stacks
 """
-from Stack import Stack
+from StackDS import Stack
 from stack_exceptions import EmptyStackException, NoSuchElementException
 
 
