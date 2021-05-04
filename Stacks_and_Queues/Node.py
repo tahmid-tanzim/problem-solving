@@ -2,7 +2,7 @@
 
 
 class Node:
-    def __init__(self, data: int):
+    def __init__(self, data):
         self.data = data
         self.next = None
 
