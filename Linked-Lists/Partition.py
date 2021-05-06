@@ -25,14 +25,14 @@ def partition(node: Node, x: int):
 
 
 if __name__ == "__main__":
-    TEST_CASES = [
+    TEST_CASES = (
         {
             "id": 1,
             "input": [3, 5, 8, 5, 10, 2, 1],
             "x": 5,
             "output": [1, 2, 3, 5, 8, 5, 10]
-        }
-    ]
+        },
+    )
 
     for testCase in TEST_CASES:
         ll = LinkedList()
