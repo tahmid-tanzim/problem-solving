@@ -17,3 +17,4 @@
     6.4. Minimum Subset Sum Difference
     6.5. Number of Subset by a given Difference
     6.6. Target Sum DP
+### 7. [Backtracking Problems](https://leetcode.com/discuss/interview-question/1098081/Famous-Backtracking-Problems)
