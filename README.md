@@ -18,3 +18,17 @@
     6.5. Number of Subset by a given Difference
     6.6. Target Sum DP
 ### 7. [Backtracking Problems](https://leetcode.com/discuss/interview-question/1098081/Famous-Backtracking-Problems)
+### 8. [LeetCode posts on System Design](https://leetcode.com/discuss/interview-question/1140451/helpful-list-of-leetcode-posts-on-system-design-at-facebook-google-amazon-uber-microsoft)
+### 9. [Python - Pipenv & Virtual Environments](https://docs.python-guide.org/dev/virtualenvs/)
+```shell
+$ python3 -m pip install --upgrade pip
+$ python3 -m pip install virtualenv
+$ virtualenv --version
+$ virtualenv project_workspace
+$ cd project_workspace
+$ source bin/activate
+$ pip install requests
+$ pip freeze > requirements.txt
+$ deactivate
+$ pip install -r requirements.txt
+```
