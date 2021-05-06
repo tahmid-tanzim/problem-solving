@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-# Cracking the Coding Interview - 4.1
+"""
+Trees and Graphs - 4.1. Route Between Nodes
+"""
 
 from Graph import Graph
 from Node import Node
@@ -44,6 +46,6 @@ if __name__ == "__main__":
         []
     ]
     graph = Graph(adjacencyList)
-    # print(f'GRAPH - ', graph)
+    print(f'GRAPH - ', graph)
     print(f'Ans should be TRUE - {routeSearch(graph, graph.getNode(0), graph.getNode(2))}\n')
     print(f'Ans should be FALSE - {routeSearch(graph, graph.getNode(2), graph.getNode(5))}\n')
