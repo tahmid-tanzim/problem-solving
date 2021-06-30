@@ -2,8 +2,7 @@
 """
 Stacks and Queues - 3.3. Stack of Plates
 """
-import unittest
-from stack_exceptions import EmptyStackException
+
 
 
 class Node:
