@@ -1,5 +1,12 @@
 #!/usr/bin/python3
 
+def isPalindrome(input: str) -> bool:
+    if len(input) <= 1:
+        return True
+    if input[0] == input[-1]:
+        return isPalindrome(input[1:len(input) - 1])
+    return False
+
 def loop(n):
     if n == 1:
         return 1
@@ -59,6 +66,10 @@ if __name__ == "__main__":
     # print(recursive_str_length('My Name is'))
     # print(show_middle_recursive([1, 2, 5, 7, 10, 13, 14, 15, 22]))
     # print(show_middle_recursive([]))
+
+    print("kayak", isPalindrome("kayak"))
+    print("abba", isPalindrome("abba"))
+    print("banana", isPalindrome("banana"))
 
     t = [2, 0, 1, 4, 3, 3]
     for i, v in enumerate(t):

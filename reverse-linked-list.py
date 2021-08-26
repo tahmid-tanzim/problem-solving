@@ -23,9 +23,7 @@ def reverse_list(head):
 
 
 def reverse_list_recursion(node):
-    if node is None:
-        return None
-    if node.next is None:
+    if node is None or node.next is None:
         return node
 
     head_node = reverse_list_recursion(node.next)
