@@ -74,12 +74,9 @@ def lowestCommonAncestor(root: TreeNode, descendantOne: TreeNode, descendantTwo:
 
 
 if __name__ == '__main__':
-    # tree_array = [3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]
-    # p = 5
-    # q = 4
-    tree_array = [1, 2]
-    p = 1
-    q = 2
+    tree_array = [3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]
+    p = 5
+    q = 4
     root_node, descendantNode = create_binary_tree(tree_array, p, q)
     lca = lowestCommonAncestor(root_node, descendantNode['p'], descendantNode['q'])
     print('LCA - ', lca.val)
