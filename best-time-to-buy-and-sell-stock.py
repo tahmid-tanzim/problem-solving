@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.6
+#!/usr/bin/python3
 # https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/564/
 # https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
 

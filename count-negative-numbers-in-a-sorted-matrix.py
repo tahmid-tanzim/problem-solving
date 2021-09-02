@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 # https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/
 
 

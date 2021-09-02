@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 # https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 
 

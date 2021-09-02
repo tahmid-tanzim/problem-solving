@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.6
+#!/usr/bin/python3
 
 """
 https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/

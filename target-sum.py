@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 # Code to Measure time taken by program to execute.
 import time
 

@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.6
+#!/usr/bin/python3
 
 # if __name__ == '__main__':
 #     N, M = [int(x) for x in input().split()]

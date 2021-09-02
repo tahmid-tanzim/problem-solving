@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 # https://www.youtube.com/watch?v=aycn9KO8_Ls
 
 """

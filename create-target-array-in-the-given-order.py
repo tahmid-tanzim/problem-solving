@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.6
+#!/usr/bin/python3
 
 """
 https://leetcode.com/problems/create-target-array-in-the-given-order/

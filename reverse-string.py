@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 # https://leetcode.com/explore/learn/card/recursion-i/250/principle-of-recursion/1440/
 
 

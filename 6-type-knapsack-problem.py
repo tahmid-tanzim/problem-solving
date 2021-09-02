@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 # https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
 # https://www.youtube.com/watch?v=iBnWHZmlIyY
 # https://leetcode.com/problems/partition-equal-subset-sum

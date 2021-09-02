@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 # https://cses.fi/problemset/task/1618
 
 if __name__ == '__main__':

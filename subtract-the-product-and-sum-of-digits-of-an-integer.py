@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.6
+#!/usr/bin/python3
 
 """
 https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/
