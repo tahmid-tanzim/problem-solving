@@ -1,4 +1,4 @@
-#!/Users/tahmid.tanzim/venv/bin/python3.7
+#!/usr/bin/python3
 # https://docs.python.org/3/tutorial/datastructures.html#nested-list-comprehensions
 # transposed
 

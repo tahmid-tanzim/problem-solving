@@ -1,4 +1,4 @@
-#!/Users/tahmid.tanzim/venv/bin/python3.7
+#!/usr/bin/python3
 # https://leetcode.com/problems/sort-array-by-parity/
 
 
