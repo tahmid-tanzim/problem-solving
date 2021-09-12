@@ -7,6 +7,7 @@ from Graph import Graph
 from Node import Node
 
 
+# BFS
 def routeSearch(g: Graph, start: Node, end: Node) -> bool:
     if start == end:
         return True
