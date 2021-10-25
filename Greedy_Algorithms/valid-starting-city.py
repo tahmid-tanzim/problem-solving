@@ -1,34 +1,61 @@
 #!/usr/bin/python3
 # https://www.algoexpert.io/questions/Valid%20Starting%20City
 
-# brute-force
+# brute-force approach
 # Time Complexity - O(n^2), `n` is number of cities.
+# Space Complexity - O(1)
 def validStartingCityBF(distances, fuel, mpg):
-    n = len(distances)
-    for startingCity in range(n):
-        i = startingCity
-        carry_forward_mileage = 0
+    numberOfCities = len(distances)
+    for startingCity in range(numberOfCities):
+        currentCity = startingCity
+        distanceRemaining = 0
         while True:
-            mileage_refuel = fuel[i] * mpg
-            carry_forward_mileage = carry_forward_mileage + mileage_refuel - distances[i]
-            if carry_forward_mileage < 0:
+            distanceAvailable = fuel[currentCity] * mpg
+            distanceRemaining = distanceRemaining + distanceAvailable - distances[currentCity]
+
+            # Check if enough mileage for visiting next city.
+            if distanceRemaining < 0:
                 break
-            i = (i + 1) % n
-            if i == startingCity:
+
+            #  Rotate city index if it reaches to end of array
+            currentCity = (currentCity + 1) % numberOfCities
+            if currentCity == startingCity:
                 return startingCity
     return -1
 
 
+# Greedy Algorithms
+# Time Complexity - O(n), `n` is number of cities.
+# Space Complexity - O(1)
 def validStartingCityGreedy(distances, fuel, mpg):
-    pass
+    numberOfCities = len(distances)
+    distanceRemaining = 0
+
+    startingCity = 0
+    minimumDistanceRemaining = 0
+
+    for currentCity in range(1, numberOfCities):
+        distanceAvailable = fuel[currentCity - 1] * mpg
+        distanceRemaining = distanceRemaining + distanceAvailable - distances[currentCity - 1]
+
+        if distanceRemaining < minimumDistanceRemaining:
+            minimumDistanceRemaining = distanceRemaining
+            startingCity = currentCity
+
+    return startingCity
 
 
 if __name__ == "__main__":
-    city_distances = [5, 25, 15, 10, 15]
-    fuel_stations = [1, 2, 1, 0, 3]
-    mileage = 10
-    # distance_cover = [10, 20, 10, 0, 30]
-    # distance_in_hand = []  # startingCity = 0
+    # output = validStartingCityBF(
+    #     [5, 25, 15, 10, 15],
+    #     [1, 2, 1, 0, 3],
+    #     10
+    # )
 
-    output = validStartingCityBF(city_distances, fuel_stations, mileage)
+    output = validStartingCityGreedy(
+        [5, 25, 15, 10, 15],
+        [1, 2, 1, 0, 3],
+        10
+    )
+
     print(output)
