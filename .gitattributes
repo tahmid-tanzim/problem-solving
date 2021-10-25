@@ -1,7 +1,9 @@
-# .gitattributes file which reclassifies `.js` files as Java:
 *.py linguist-language=Python
 *.js linguist-language=JavaScript
 *.json linguist-language=JavaScript
 *.java linguist-language=Java
+*.java linguist-detectable=true
 *.sh linguist-language=Shell
 *.go linguist-language=Go
+*.html linguist-language=HTML
+*.css linguist-language=CSS
