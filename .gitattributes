@@ -6,6 +6,6 @@ Bash_Scripts/*.sh linguist-language=Shell
 *.go linguist-language=Go
 *.html linguist-language=HTML
 *.css linguist-language=CSS
-*README.md linguist-documentation
+*.md linguist-documentation
 *.txt linguist-documentation
 
