@@ -1,8 +1,7 @@
 *.py linguist-language=Python
 *.js linguist-language=JavaScript
 *.json linguist-language=JavaScript
-*.java linguist-language=Java
-*.java linguist-detectable=true
+*.java linguist-language=Python
 *.sh linguist-language=Shell
 *.go linguist-language=Go
 *.html linguist-language=HTML
