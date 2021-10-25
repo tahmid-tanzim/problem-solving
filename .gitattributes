@@ -3,7 +3,6 @@
 *.json linguist-language=JavaScript
 *.java linguist-detectable=false
 *.sh linguist-language=Shell
-# *.sh linguist-detectable=false
 *.go linguist-language=Go
 *.html linguist-language=HTML
 *.css linguist-language=CSS
