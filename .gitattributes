@@ -3,8 +3,8 @@
 *.json linguist-language=JavaScript
 # Java/*.java linguist-language=Java
 # Bash_Scripts/*.sh linguist-language=Shell
-*.java linguist-detectable=true
-*.sh linguist-detectable=true
+*.java linguist-detectable=false
+*.sh linguist-detectable=false
 *.go linguist-language=Go
 *.html linguist-language=HTML
 *.css linguist-language=CSS
