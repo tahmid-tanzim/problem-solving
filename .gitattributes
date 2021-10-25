@@ -1,8 +1,10 @@
 *.py linguist-language=Python
 *.js linguist-language=JavaScript
 *.json linguist-language=JavaScript
-Java/*.java linguist-language=Java
-Bash_Scripts/*.sh linguist-language=Shell
+# Java/*.java linguist-language=Java
+# Bash_Scripts/*.sh linguist-language=Shell
+*.java linguist-detectable=true
+*.sh linguist-detectable=true
 *.go linguist-language=Go
 *.html linguist-language=HTML
 *.css linguist-language=CSS
