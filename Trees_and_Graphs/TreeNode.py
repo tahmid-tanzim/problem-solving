@@ -21,3 +21,22 @@ class TreeNode:
 
     def addRight(self, right):
         self.right = right
+
+
+def create_binary_tree(array):
+    root = TreeNode(array[0])
+    queue = [(0, root)]
+
+    while len(queue) > 0:
+        (i, p) = queue.pop(0)
+        li = i * 2 + 1
+        ri = i * 2 + 2
+        if li < len(array) and array[li] is not None:
+            t = TreeNode(array[li])
+            p.left = t
+            queue.append((li, t))
+        if ri < len(array) and array[ri] is not None:
+            t = TreeNode(array[ri])
+            p.right = t
+            queue.append((ri, t))
+    return root
