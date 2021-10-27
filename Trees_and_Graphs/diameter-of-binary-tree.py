@@ -3,34 +3,38 @@
 # https://leetcode.com/problems/diameter-of-binary-tree/
 # Dynamic Programming on Tree
 # DP on Tree
+# maximum number of nodes between 2 leaf nodes
 from TreeNode import create_binary_tree
 
 
-class Solution:
-    def __init__(self):
-        self._result = float("-inf")
+def heightOfBinaryTree(node) -> int:
+    if node is None:
+        return 0
+    leftHeight = heightOfBinaryTree(node.left)
+    rightHeight = heightOfBinaryTree(node.right)
+    actualHeight = 1 + max(leftHeight, rightHeight)
+    return actualHeight
 
-    def calculateDiameterOfBinaryTree(self, root) -> int:
-        """
-        ~> maximum number of nodes between 2 leaf nodes
-        """
-        if root is None:
-            return 0
 
-        left_number_of_nodes = self.calculateDiameterOfBinaryTree(root.left)
-        right_number_of_nodes = self.calculateDiameterOfBinaryTree(root.right)
-        max_number_of_nodes = 1 + max(left_number_of_nodes, right_number_of_nodes)
-        diameter_of_2_leaf = max(max_number_of_nodes, 1 + left_number_of_nodes + right_number_of_nodes)
-        self._result = max(self._result, diameter_of_2_leaf)
-        return max_number_of_nodes
+def diameterOfBinaryTree(root) -> int:
+    if root is None:
+        return 0
 
-    def diameterOfBinaryTree(self, root) -> int:
-        self.calculateDiameterOfBinaryTree(root)
-        return int(self._result) - 1
+    leftHeight = heightOfBinaryTree(root.left)
+    rightHeight = heightOfBinaryTree(root.right)
+    leftDiameter = diameterOfBinaryTree(root.left)
+    rightDiameter = diameterOfBinaryTree(root.right)
+
+    # Longest diameter formed either in left or right child. diameter path doesn't passed through root node
+    diameterFromChild = max(leftDiameter, rightDiameter)
+
+    # Forming diameter starting from `left` leaf child to `right` leaf child through root node
+    diameterIncludingRoot = 1 + leftHeight + rightHeight
+
+    return max(diameterFromChild, diameterIncludingRoot)
 
 
 if __name__ == "__main__":
     tree_array = [1, 2, 3, 4, 5]
     root_node = create_binary_tree(tree_array)
-    obj = Solution()
-    print(obj.diameterOfBinaryTree(root_node))
+    print(diameterOfBinaryTree(root_node))

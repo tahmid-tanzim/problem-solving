@@ -24,7 +24,7 @@ def diameter(node, value):
     value = max(value, leftHeight + rightHeight)
     diameter(node.left, value)
     diameter(node.right, value)
-    print(value)
+    # print(value)
     return value
 
 
@@ -35,5 +35,4 @@ def binaryTreeDiameter(tree):
 if __name__ == "__main__":
     tree_array = [1, 2, 3, 4, 5]
     root_node = create_binary_tree(tree_array)
-    obj = Solution()
-    print(obj.diameterOfBinaryTree(root_node))
+    print(binaryTreeDiameter(root_node))

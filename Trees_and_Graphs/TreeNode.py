@@ -16,6 +16,9 @@ class TreeNode:
     def getName(self):
         return self.name
 
+    def getValue(self):
+        return self.name
+
     def addLeft(self, left):
         self.left = left
 
