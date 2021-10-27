@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # https://www.youtube.com/playlist?list=PL_z_8CaSLPWfxJPz2-YKqL9gXWdgrhvdn
 # https://leetcode.com/problems/diameter-of-binary-tree/
+# https://www.algoexpert.io/questions/Binary%20Tree%20Diameter
 # Dynamic Programming on Tree
 # DP on Tree
 # maximum number of nodes between 2 leaf nodes

@@ -4,6 +4,7 @@
 class TreeNode:
     def __init__(self, name, left=None, right=None):
         self.name = name
+        self.val = name
         self.left = left
         self.right = right
 
@@ -17,7 +18,7 @@ class TreeNode:
         return self.name
 
     def getValue(self):
-        return self.name
+        return self.val
 
     def addLeft(self, left):
         self.left = left
