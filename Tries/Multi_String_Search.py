@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# https://www.algoexpert.io/questions/Suffix%20Trie%20Construction
+# https://www.algoexpert.io/questions/Multi%20String%20Search
 
 
 class SuffixTrie:
@@ -29,10 +29,18 @@ class SuffixTrie:
             if letter not in current_node:
                 return False
             current_node = current_node[letter]
-        return self.endSymbol in current_node
+        return True
+
+
+def multiStringSearch(bigString, smallStrings):
+    obj = SuffixTrie(bigString)
+    return [obj.contains(smallString) for smallString in smallStrings]
 
 
 if __name__ == "__main__":
-    obj = SuffixTrie("babc")
-    print(obj.contains("abc"))  # True
-    print(obj.contains("ab"))  # False
+    # print(multiStringSearch("this is a big string", ["this", "yo", "is", "a", "bigger", "string", "kappa"]))
+    # print(multiStringSearch("abcdefghijklmnopqrstuvwxyz", ["abc", "mnopqr", "wyz", "no", "e", "tuuv"]))
+
+    # Expected Output - [false, false, false, false, true, false, false]
+    print(multiStringSearch("adcb akfkw afnmc fkadn vkaca jdaf dacb cdba cbda",
+                            ["abcd", "acbd", "adbc", "dabc", "cbda", "cabd", "cdab"]))  # False
