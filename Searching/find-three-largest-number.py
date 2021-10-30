@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+# https://www.algoexpert.io/questions/Find%20Three%20Largest%20Numbers
+"""
+  The function should return duplicate integers if necessary; for example, it
+  should return [10, 10, 12] for an input array of
+  [10, 5, 9, 10, 12].
+"""
 
 
 def findThreeLargestNumbers(array):
