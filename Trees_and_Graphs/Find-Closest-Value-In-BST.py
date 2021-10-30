@@ -17,7 +17,8 @@ Description - A valid BST node is `left.values < node.value <= right.values`
 """
 
 
-# This is the class of the input tree. Do not edit.
+# Avg. O(log(n)) time & O(1) space
+# Worst O(n) time & O(1) space
 class BST:
     def __init__(self, value):
         self.value = value
