@@ -2,6 +2,7 @@
 # https://www.algoexpert.io/questions/Max%20Subset%20Sum%20No%20Adjacent
 
 
+# O(n) time, O(1) space
 def maxSubsetSumNoAdjacent(array):
     # Base Case
     if len(array) == 0:
