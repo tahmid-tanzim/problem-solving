@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # https://leetcode.com/problems/two-sum/
+# https://www.algoexpert.io/questions/Two%20Number%20Sum
 
 
 # Time Complexity - O(n^2)
