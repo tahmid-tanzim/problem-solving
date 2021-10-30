@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# https://www.algoexpert.io/questions/First%20Non-Repeating%20Character
+
 
 def firstNonRepeatingCharacter(string):
     hashtable = dict()
