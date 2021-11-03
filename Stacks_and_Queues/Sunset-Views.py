@@ -16,7 +16,7 @@
   relation to the input array, you can interpret these directions as right for
   east and left for west.
 
-  Important note: the indices in the ouput array should be sorted in ascending
+  Important note: the indices in the output array should be sorted in ascending
   order.
 
 Sample Input #1
