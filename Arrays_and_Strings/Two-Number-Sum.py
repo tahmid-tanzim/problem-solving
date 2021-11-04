@@ -4,6 +4,7 @@
 
 
 # Time Complexity - O(n^2)
+# Space Complexity - O(1)
 def twoNumberSum1(array, targetSum):
     i = 0
     while i < len(array) - 1:
@@ -16,7 +17,8 @@ def twoNumberSum1(array, targetSum):
     return []
 
 
-# Store the Y in HashTable - O(n)
+# Store the Y in HashTable
+# O(n) time, O(n) space
 def twoNumberSum2(array, targetSum):
     HashTable = {}
     i = 0
@@ -30,7 +32,8 @@ def twoNumberSum2(array, targetSum):
     return []
 
 
-# Sort array O(nlog(n))
+# Sort array
+# O(nlog(n)) time, O(1) space
 def twoNumberSum3(array, targetSum):
     array.sort()
     left = 0
