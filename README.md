@@ -1,5 +1,9 @@
 # Problem Solving
 
+### 0. Big O Complexity Chart
+![time complexity graph](https://adrianmejia.com/images/time-complexity-examples.png?raw=true)
+
+[Big-O Cheat Sheet](https://www.bigocheatsheet.com/)
 ### 1. [Heap - Heap Sort - Heapify - Priority Queues](Heap/README.md)
 ### 2. [Dynamic Programming](Dynamic_Programming/README.md)
 ### 3. [Array and Strings](Arrays_and_Strings/README.md)
