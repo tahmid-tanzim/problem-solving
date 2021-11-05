@@ -14,7 +14,7 @@ Return the minimum cost to reach the top of the floor.
 
 # O(n) time, O(1) space
 class Solution1:
-    # Bottom Up, Recursive
+    # Top Down, Recursive
     def minCostClimbingStairsHelper(self, cost: List[int], index, totalCost) -> int:
         if index < 2:
             return cost[index]
@@ -32,8 +32,9 @@ class Solution1:
 
 # O(n) time, O(1) space
 class Solution2:
-    # Top Down, Iterative
-    def minCostClimbingStairs(self, cost: List[int]) -> int:
+    # Bottom Up, Iterative
+    @staticmethod
+    def minCostClimbingStairs(cost: List[int]) -> int:
         n = len(cost)
         first, second, *others = cost
 
