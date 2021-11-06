@@ -22,7 +22,6 @@ Return the minimum number of dollars you need to travel every day in the given l
 
 # O(n) time, O(1) space
 class Solution1:
-    # Bottom Up, Recursion
     def minCostTickets(self, days: List[int], costs: List[int]) -> int:
         dp = dict()
 
@@ -45,7 +44,6 @@ class Solution1:
 
 
 class Solution2:
-    # Bottom Up, Recursion
     def minCostTickets(self, days: List[int], costs: List[int]) -> int:
         dp = dict()
         for i in range(len(days) - 1, -1, -1):
