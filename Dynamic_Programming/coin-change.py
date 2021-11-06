@@ -17,7 +17,7 @@ You may assume that you have an infinite number of each kind of coin.
 # n is the number of coins
 # A is the target amount
 class Solution1:
-    # Top Down, Recursive, Memoization
+    # Top Down, Recursive, Memoization (array)
     def coinChangeHelper(self, coins: List[int], remainingAmount: int, MEMOIZATION_TABLE) -> int:
         if remainingAmount < 0:
             return -1
@@ -45,6 +45,35 @@ class Solution1:
 # n is the number of coins
 # A is the target amount
 class Solution2:
+    # Top Down, Recursive, Memoization (dictionary)
+    def coinChangeHelper(self, coins: List[int], remainingAmount: int, MEMOIZATION_TABLE) -> int:
+        if remainingAmount < 0:
+            return -1
+        if remainingAmount == 0:
+            return 0
+        if remainingAmount in MEMOIZATION_TABLE:
+            return MEMOIZATION_TABLE[remainingAmount]
+
+        minResult = float("inf")
+        for coin in coins:
+            subResult = self.coinChangeHelper(coins, remainingAmount - coin, MEMOIZATION_TABLE)
+            if 0 <= subResult < minResult:
+                minResult = 1 + subResult
+        if minResult == float("inf"):
+            MEMOIZATION_TABLE[remainingAmount] = -1
+        else:
+            MEMOIZATION_TABLE[remainingAmount] = minResult
+
+        return MEMOIZATION_TABLE[remainingAmount]
+
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        return self.coinChangeHelper(coins, amount, dict())
+
+
+# O(A * n) time, O(A) space
+# n is the number of coins
+# A is the target amount
+class Solution3:
     # Bottom Up, Iterative, Tabulation
     def coinChange(self, coins: List[int], amount: int) -> int:
         numOfCoins = [float("inf")] * (amount + 1)

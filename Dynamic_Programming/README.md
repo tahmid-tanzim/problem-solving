@@ -4,11 +4,11 @@
 Build solution based on one or more previous case
 i.e. `return f(n - 1) + f(n - 2)`
 
-Tabulation - Bottom Up
+Tabulation
 
 
 ### Top-Down Approach
-Memoization - Top Down
+Recursion, Memoization
 
 
 ### Half-and-Half Approach
