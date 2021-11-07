@@ -8,12 +8,12 @@
 ### 3. [Dynamic Programming](Dynamic_Programming/README.md)
 ### 4. [Array and Strings](Arrays_and_Strings/README.md)
 ### 5. [Trees and Graphs](Trees_and_Graphs/README.md)
-### 6. [0/1 Knapsack](01-knapsack-problem.py)
+### 6. [0/1 Knapsack](Dynamic_Programming/01-knapsack-problem.py)
 * Unbounded knapsack 
 * Fractional Greedy
 * Memoization
 * Top Down
-### 7. [Knapsack variation Problem](6-type-knapsack-problem.py)
+### 7. [Knapsack variation Problem](Dynamic_Programming/6-type-knapsack-problem.py)
 
     7.1. Subset Sum Problem ~> https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
     7.2. Equal Subset Sum Partition ~> https://www.youtube.com/watch?v=UmMh7xp07kY
