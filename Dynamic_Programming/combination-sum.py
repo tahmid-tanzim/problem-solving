@@ -4,7 +4,7 @@ from typing import List
 
 
 # Recursive, Memoization
-# O(t) time, O(t) space
+# O(n ^ t) time, O(n ^ t) space
 class Solution1:
     def combinationSumHelper(self, candidates: List[int], target: int, index, DP) -> List[List[int]]:
         if target == 0:
