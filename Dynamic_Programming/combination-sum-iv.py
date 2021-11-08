@@ -40,5 +40,5 @@ if __name__ == "__main__":
     # (3, 1)
     # Note that different sequences are counted as different combinations.
 
-    print(obj.combinationSum4([9], 3))  # 5
+    print(obj.combinationSum4([9], 3))
     # Output: 0
