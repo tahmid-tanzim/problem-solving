@@ -1,7 +1,25 @@
 # Problem Solving
 Coding Interview Preparation
-### 1. Big O Complexity Chart
+### 1. Asymptotic Notations
+
+**Big O Complexity Chart**
+
 ![time complexity graph](https://adrianmejia.com/images/time-complexity-examples.png?raw=true)
+
+```markdown
+1 < log(n) < n < n*log(n) < n^2 < n^3 < ... < 2^n < 3^n < ... < n^n
+
+<Polynomial>
+    1 < log(n) < n < n*log(n) < n^2 < n^3 ...
+</Polynomial>  
+
+<Exponential>
+    2^n < 3^n < ... < n^n
+</Exponential>
+```
+1. Lower Bound - `Ω` Omega
+2. Upper Bound - `O` Big-O
+3. Tight Bound - `Θ` Theta
 
 [Big-O Cheat Sheet](https://www.bigocheatsheet.com/)
 ### 2. [Heap - Heap Sort - Heapify - Priority Queues](Heap/README.md)
