@@ -4,6 +4,7 @@ def set_annual():
     global annual
     annual = 120
 
+
 def per_month():
     return annual / 2
 
