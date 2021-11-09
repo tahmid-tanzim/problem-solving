@@ -1,6 +1,6 @@
 # Recursion
 
-### Find Time Complexity of Recursive Function
+## 1. Find Time Complexity of Recursive Function
 * Time Complexity - `O(branches ^ depth)`
 * Space Complexity - `O(depth)`
 
@@ -13,7 +13,7 @@ By using Memoization / Caching precomputed results in a hashtable. We can improv
 T(n) = | 
        | T(n-1) + 2  n>0
 ```
-### Head Recursion (Linear Ascending)
+## 2. Head Recursion (Linear Ascending)
 * Time Complexity - `O(n)`
 * Space Complexity - `O(n)`
 ```python
@@ -23,7 +23,7 @@ def printAscendingOrder(n: int):
     printAscendingOrder(n - 1) 
     print(n)
 ```
-### Tail Recursion (Linear Descending)
+## 3. Tail Recursion (Linear Descending)
 * Time Complexity - `O(n)`
 * Space Complexity - `O(n)`
 ```python
@@ -33,9 +33,9 @@ def printDescendingOrder(n: int):
     print(n)
     printDescendingOrder(n - 1) 
 ```
-### Tree Recursion 
+## 4. Tree Recursion 
 Tree Recursion is if a recursive function call itself more than once
-#### Without Memoization
+### 4.1. Recursive Fibonacci Series without Memoization
 * Time Complexity - `O(2 ^ n)`
 * Space Complexity - `O(n)`
 ```python
@@ -44,7 +44,7 @@ def fib(n: int):
         return n
     return fib(n - 1) + fib(n - 2) 
 ```
-#### Memoization
+### 4.2. Recursive Fibonacci Series with Memoization
 We can reduce time complexity from exponential to liner by using memoization technique.
 * Time Complexity - `O(n)`
 * Space Complexity - `O(n)`
@@ -58,7 +58,23 @@ def fib(n: int, CACHE: dict = {}):
     CACHE[n] = fib(n - 1, CACHE) + fib(n - 2, CACHE) 
     return CACHE[n]
 ```
-### Indirect Recursion 
+### 4.3. Iterative Fibonacci Series 
+* Time Complexity - `O(n)`
+* Space Complexity - `O(1)`
+```python
+def fib(n: int):
+    s = -1
+    t0 = 0
+    t1 = 1
+    if n <= 1:
+        return n
+    for i in range(2, n + 1):
+        s = t0 + t1
+        t0 = t1
+        t1 = s
+    return s
+```
+## 5. Indirect Recursion 
 If two or more function calling each other in a circular form.
 ```shell
 (A) - (B)
@@ -80,7 +96,7 @@ class Solution:
         print(n)
         self.funcA(n//2)
 ```
-### Nested Recursion 
+## 6. Nested Recursion 
 Sample Code
 ```python
 def func(n: int):
@@ -88,7 +104,7 @@ def func(n: int):
         return n - 10 
     return func(func(n + 11))
 ```
-### Sum of first `n` natural numbers
+## 7. Sum of first `n` natural numbers
 n = 6
 1 + 2 + 3 + 4 + 5 + 6 = 21
 
@@ -102,7 +118,7 @@ T(n) = |
        | T(n-1) + n  n>0
 ```
 
-#### Recursive Solution
+### 7.1. Recursive Solution
 * Time Complexity - `O(n)`
 * Space Complexity - `O(n)` i.e. an activation record is pushed into the stack
 ```python
@@ -111,7 +127,7 @@ def sumOfNaturalNumbers(n):
         return 0
     return sumOfNaturalNumbers(n - 1) + n
 ```
-#### Iterative Solution
+### 7.2. Iterative Solution
 * Time Complexity - `O(n)`
 * Space Complexity - `O(1)`
 ```python
@@ -121,7 +137,7 @@ def sumOfNaturalNumbers(n):
         total += i
     return total
 ```
-#### Solution by using natural number formula
+### 7.3. Solution by using natural number formula
 Formula - `T(n) = n * (n+1) / 2`
 * Time Complexity - `O(1)`
 * Space Complexity - `O(1)`
@@ -129,7 +145,7 @@ Formula - `T(n) = n * (n+1) / 2`
 def sumOfNaturalNumbers(n):
     return n * (n+1) // 2
 ```
-### Factorial
+## 8. Factorial
 * Time Complexity - `O(n)`
 * Space Complexity - `O(n)`
 ```python
@@ -138,7 +154,7 @@ def factorial(n):
         return 1
     return factorial(n-1) * n
 ```
-### Power Calculation using Recursion
+## 9. Power Calculation using Recursion
 ```markdown
 2 ^ 5 = 2 * 2 * 2 * 2 * 2
 
@@ -180,6 +196,59 @@ def power2(m, n):
         return 1
     if n % 2 == 0:
         return power2(m * m, n // 2)
-    else:
-        return m * power2(m * m, (n-1) / 2)
+    return m * power2(m * m, (n-1) // 2)
 ```
+## 10. Combination Formula 
+```markdown
+nCr = n! / (r! * (n-r)!)
+
+i.e. n = 5, 0 <= r <= n
+```
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    return factorial(n-1) * n
+
+# O(n) time, O(n) space 
+def combination(n, r):
+    t1 = factorial(n)
+    t2 = factorial(r)
+    t3 = factorial(n-r)
+    return t1 / (t2 * t3)
+```
+### Pascal's Triangle
+```markdown
+              (1)
+           /       \
+         (1)       (1)
+        /    \   /    \
+      (1)     (2)     (1)
+     /   \   /   \   /   \
+   (1)    (3)      (3)     (1)
+  /   \   /   \   /   \   /   \
+(1)    (4)     (6)     (4)    (1)
+```
+Recursive Formula
+```markdown
+nCr = (n-1)C(r-1) + (n-1)Cr  
+Base Case - return 1 when r == 0 and n == r  
+4C2 = 3C1 + 3C2
+```
+Sample Code
+```python
+# O(n^r) time, O(n) space 
+def nCr(n, r):
+    if r == 0 and n == r :
+        return 1
+    return nCr(n - 1, r - 1) + nCr(n - 1, r)
+```
+## 11. Taylor Series 
+```markdown
+e^x = 1 + x/1 + x^2/2! + x^3/3! + x^4/4! + ... + n times
+
+i.e. summation of x^n/n!
+range of n is 0 <= n < &infin;
+```
+
