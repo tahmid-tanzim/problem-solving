@@ -20,3 +20,7 @@ deploy
 
 war-and-peace/*.txt
 war-and-peace/*.zip
+
+# Half Done Problems
+Dynamic_Programming/combination-sum-ii.py
+binary-tree-longest-consecutive-sequence.py

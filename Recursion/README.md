@@ -233,14 +233,14 @@ def combination(n, r):
 Recursive Formula
 ```markdown
 nCr = (n-1)C(r-1) + (n-1)Cr  
-Base Case - return 1 when r == 0 and n == r  
+Base Case - return 1 when r == 0 or n == r  
 4C2 = 3C1 + 3C2
 ```
 Sample Code
 ```python
 # O(n^r) time, O(n) space 
 def nCr(n, r):
-    if r == 0 and n == r :
+    if r == 0 or n == r:
         return 1
     return nCr(n - 1, r - 1) + nCr(n - 1, r)
 ```
