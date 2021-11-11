@@ -2,8 +2,7 @@
 # https://leetcode.com/problems/unique-binary-search-trees/
 import time
 """
-Formula -
-2n C n / n + 1
+Formula - 2nCn / n+1
 """
 
 
