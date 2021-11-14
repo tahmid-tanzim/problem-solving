@@ -8,6 +8,7 @@ class Solution1:
     def __init__(self):
         self.counter = -1
 
+    # Recursive
     def isPalindrome(self, s: str, leftIdx: int, rightIdx: int):
         if leftIdx < 0 or rightIdx >= len(s):
             return
@@ -16,6 +17,7 @@ class Solution1:
             self.counter += 1
             self.isPalindrome(s, leftIdx - 1, rightIdx + 1)
 
+    # Iterative
     # def isPalindrome(self, s: str, leftIdx: int, rightIdx: int):
     #     while leftIdx >= 0 and rightIdx < len(s) and s[leftIdx] == s[rightIdx]:
     #         self.counter += 1

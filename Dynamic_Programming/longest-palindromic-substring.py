@@ -7,6 +7,7 @@ class Solution1:
     def __init__(self):
         self._longestSubstring = None
 
+    # Recursive
     # def _isPalindrome(self, s: str, leftIdx: int, rightIdx: int):
     #     if leftIdx < 0 or rightIdx >= len(s):
     #         return
@@ -16,6 +17,7 @@ class Solution1:
     #             self._longestSubstring = dict(length=rightIdx - leftIdx + 1, value=s[leftIdx:rightIdx + 1])
     #         self._isPalindrome(s, leftIdx - 1, rightIdx + 1)
 
+    # Iterative
     def _isPalindrome(self, s: str, leftIdx: int, rightIdx: int):
         while leftIdx >= 0 and rightIdx < len(s) and s[leftIdx] == s[rightIdx]:
             if rightIdx - leftIdx + 1 > self._longestSubstring["length"]:
@@ -36,7 +38,7 @@ class Solution1:
 class Solution2:
     @staticmethod
     def longestPalindrome(string: str) -> str:
-        palindromicSubstring = str()
+        palindromicSubStr = str()
         n = len(string)
         i = 0
         leftPointer = 0
@@ -46,8 +48,8 @@ class Solution2:
             while (leftPointer >= 0 and rightPointer < n) and string[leftPointer] == string[rightPointer]:
                 leftPointer -= 1
                 rightPointer += 1
-            if len(palindromicSubstring) < (rightPointer - leftPointer - 1):
-                palindromicSubstring = string[leftPointer + 1:rightPointer]
+            if len(palindromicSubStr) < (rightPointer - leftPointer - 1):
+                palindromicSubStr = string[leftPointer + 1:rightPointer]
 
             # Check if palindrome string length is EVEN
             leftPointer = i - 1
@@ -55,18 +57,49 @@ class Solution2:
             while (leftPointer >= 0 and rightPointer < n) and string[leftPointer] == string[rightPointer]:
                 leftPointer -= 1
                 rightPointer += 1
-            if len(palindromicSubstring) < (rightPointer - leftPointer - 1):
-                palindromicSubstring = string[leftPointer + 1:rightPointer]
+            if len(palindromicSubStr) < (rightPointer - leftPointer - 1):
+                palindromicSubStr = string[leftPointer + 1:rightPointer]
 
             i += 1
             leftPointer = i
             rightPointer = i
 
-        return palindromicSubstring
+        return palindromicSubStr
+
+
+class Solution3:
+    @staticmethod
+    def getPalindromicSubStr(string: str, leftP: int, rightP: int, substring: str) -> str:
+        while (leftP >= 0 and rightP < len(string)) and string[leftP] == string[rightP]:
+            leftP -= 1
+            rightP += 1
+        if len(substring) < (rightP - leftP - 1):
+            substring = string[leftP + 1:rightP]
+        return substring
+
+    def longestPalindrome(self, string: str) -> str:
+        palindromicSubStr = str()
+        i = 0
+        leftP = 0
+        rightP = 0
+        while i < len(string):
+            # Check if palindrome string length is ODD
+            palindromicSubStr = self.getPalindromicSubStr(string, leftP, rightP, palindromicSubStr)
+
+            # Check if palindrome string length is EVEN
+            leftP = i - 1
+            rightP = i
+            palindromicSubStr = self.getPalindromicSubStr(string, leftP, rightP, palindromicSubStr)
+        
+            i += 1
+            leftP = i
+            rightP = i
+
+        return palindromicSubStr
 
 
 if __name__ == '__main__':
-    obj = Solution2()
+    obj = Solution3()
     print(obj.longestPalindrome("babad"))
     print(obj.longestPalindrome("cbbd"))
     print(obj.longestPalindrome("a"))
