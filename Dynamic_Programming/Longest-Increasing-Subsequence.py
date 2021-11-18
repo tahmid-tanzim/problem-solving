@@ -107,5 +107,7 @@ class Solution2:
 
 if __name__ == '__main__':
     print(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))  # 4
-    print(Solution1.longestIncreasingSubsequence([5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]))  # [-24, 2, 3, 5, 6, 35]
-    print(Solution2.longestIncreasingSubsequence([5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]))  # [-24, 2, 3, 5, 6, 35]
+
+    obj = Solution1()
+    print(obj.longestIncreasingSubsequence([5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]))  # [-24, 2, 3, 5, 6, 35]
+    print(obj.longestIncreasingSubsequence([5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]))  # [-24, 2, 3, 5, 6, 35]
