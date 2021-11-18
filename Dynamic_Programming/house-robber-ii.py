@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# https://leetcode.com/problems/house-robber/
+# https://leetcode.com/problems/house-robber-ii/
 from typing import List
 
 
@@ -16,7 +16,7 @@ class Solution1:
 
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
-        return self.robHelper(nums, 0, n - 1)
+        return max(nums[0], self.robHelper(nums[1:n], 0, n - 2), self.robHelper(nums[0:n - 1], 0, n - 2))
 
 
 # Top Down, Recursive, Memoization
@@ -34,25 +34,15 @@ class Solution2:
 
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
-        return self.robHelper(nums, n - 1, {})
-
-
-# Bottom Up, Tabulation
-# Time - O(n), Space - O(n)
-class Solution3:
-    def rob(self, nums: List[int]) -> int:
-        n = len(nums)
-        TABLE = [0] * (n + 1)
-        TABLE[1] = nums[0]
-        for houseIndex in range(2, n + 1):
-            TABLE[houseIndex] = max(TABLE[houseIndex - 1], TABLE[houseIndex - 2] + nums[houseIndex - 1])
-        return TABLE[n]
+        if n <= 1:
+            return nums[0]
+        excludingFirstHouse = self.robHelper(nums[1:n], n - 2, {})
+        excludingLastHouse = self.robHelper(nums[0:n - 1], n - 2, {})
+        return max(excludingFirstHouse, excludingLastHouse)
 
 
 if __name__ == '__main__':
-    obj = Solution3()
+    obj = Solution2()
+    print(obj.rob([2, 3, 2]))  # 3
     print(obj.rob([1, 2, 3, 1]))  # 4
-    print(obj.rob([2, 7, 9, 3, 1]))  # 12
-    print(obj.rob([2, 8, 3, 1, 10]))  # 18
-    print(obj.rob([10]))  # 10
-    print(obj.rob([18, 100]))  # 100
+    print(obj.rob([1, 2, 3]))  # 3
