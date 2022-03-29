@@ -12,7 +12,7 @@ def blocks(files, size=65536):
 
 def word_count_by_blocks():
     start_time = time.time()
-    with open('wap.txt', 'r', encoding="utf-8", errors='ignore') as wap_file:
+    with open('book-war-and-peace.txt', 'r', encoding="utf-8", errors='ignore') as wap_file:
         word_count = sum(bl for bl in blocks(wap_file))
     print(f'\n\tBLOCKS\n1. Total Time: {time.time() - start_time:.3f}\n2. Word Count: {word_count}')
     # 1. Total Time: 20.831
@@ -21,7 +21,7 @@ def word_count_by_blocks():
 
 def word_count_by_loop():
     start_time = time.time()
-    with open('wap.txt', 'r', encoding="utf-8", errors='ignore') as wap_file:
+    with open('book-war-and-peace.txt', 'r', encoding="utf-8", errors='ignore') as wap_file:
         word_count = 0
         for line in wap_file:
             word_count += len(line.split())
