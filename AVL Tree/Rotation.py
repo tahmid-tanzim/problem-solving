@@ -43,7 +43,23 @@ def LLRotation(parent_node):
 
 
 def LRRotation(parent_node):
-    pass
+    parent_left = parent_node.left
+    parent_left_right = parent_left.right
+
+    parent_left.right = parent_left_right.left
+    parent_node.left = parent_left_right.right
+
+    parent_left_right.left = parent_left
+    parent_left_right.right = parent_node
+
+    parent_left.height = find_height(parent_left)
+    parent_node.height = find_height(parent_node)
+    parent_left_right.height = find_height(parent_left_right)
+
+    if Node.__root == parent_node:
+        Node.__root = parent_left_right
+
+    return parent_left_right
 
 
 def RRRotation(parent_node):
@@ -76,11 +92,26 @@ def insert(parent_node, data):
 
 
 if __name__ == "__main__":
-    root = insert(None, 10)
+    """
+     LL Rotation
+     """
+    # root = insert(None, 10)
+    # Node.__root = root
+    #
+    # insert(root, 5)
+    # insert(root, 2)
+    #
+    # root = Node.__root
+    # print(root)
+
+    """
+    LR Rotation
+    """
+    root = insert(None, 50)
     Node.__root = root
 
-    insert(root, 5)
-    insert(root, 2)
+    insert(root, 10)
+    insert(root, 20)
 
     root = Node.__root
-    print(root.right)
+    print(root)
