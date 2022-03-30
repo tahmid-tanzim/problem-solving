@@ -60,6 +60,25 @@ def LLRotation(parent_node):
 
 
 def LRRotation(parent_node):
+    """
+    Before LR Rotation
+
+            (p)
+           /
+        (pl)
+           \
+           (plr)
+          /    \
+     (plrl)   (plrr)
+
+    After LR Rotation
+
+         (plr)
+       /      \
+    (pl)       (p)
+      \        /
+    (plrl)  (plrr)
+    """
     parent_left = parent_node.left
     parent_left_right = parent_left.right
 
