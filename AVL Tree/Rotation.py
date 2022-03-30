@@ -27,6 +27,23 @@ def balance_factor(parent_node):
 
 
 def LLRotation(parent_node):
+    """
+    Before LL Rotation
+
+            (p)
+           /
+        (pl)
+       /   \
+    (pll)  (plr)
+
+    After LL Rotation
+
+        (pl)
+       /   \
+    (pll)  (p)
+          /
+       (plr)
+    """
     parent_left = parent_node.left
     parent_left_right = parent_left.right
 
