@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 
+# keys - (10, 20, 30, 25, 28, 27, 5)
+
 class Node:
     __root = None
 
@@ -14,7 +16,7 @@ class Node:
         return str(self.data)
 
 
-def find_height(parent_node):
+def height(parent_node):
     left_height = parent_node.left.height if parent_node is not None and parent_node.left is not None else 0
     right_height = parent_node.right.height if parent_node is not None and parent_node.right is not None else 0
     return max(left_height, right_height) + 1
@@ -50,8 +52,8 @@ def LLRotation(parent_node):
     parent_left.right = parent_node
     parent_node.left = parent_left_right
 
-    parent_node.height = find_height(parent_node)
-    parent_left.height = find_height(parent_left)
+    parent_node.height = height(parent_node)
+    parent_left.height = height(parent_left)
 
     if Node.__root == parent_node:
         Node.__root = parent_left
@@ -88,9 +90,9 @@ def LRRotation(parent_node):
     parent_left_right.left = parent_left
     parent_left_right.right = parent_node
 
-    parent_left.height = find_height(parent_left)
-    parent_node.height = find_height(parent_node)
-    parent_left_right.height = find_height(parent_left_right)
+    parent_left.height = height(parent_left)
+    parent_node.height = height(parent_node)
+    parent_left_right.height = height(parent_left_right)
 
     if Node.__root == parent_node:
         Node.__root = parent_left_right
@@ -115,7 +117,7 @@ def insert(parent_node, data):
     else:
         parent_node.right = insert(parent_node.right, data)
 
-    parent_node.height = find_height(parent_node)
+    parent_node.height = height(parent_node)
     if balance_factor(parent_node) == 2 and balance_factor(parent_node.left) == 1:
         return LLRotation(parent_node)
     elif balance_factor(parent_node) == 2 and balance_factor(parent_node.left) == -1:
