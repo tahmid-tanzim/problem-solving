@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# https://leetcode.com/problems/find-lucky-integer-in-an-array/
 
 
 def find_lucky(arr):
