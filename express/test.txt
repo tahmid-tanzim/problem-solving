@@ -1,0 +1,29 @@
+
+
+table location
+id PK
+name VARCHAR
+parentID FK(location)
+
+
+table sensor
+id PK
+temp VARCHAR
+humidity VARCHAR
+createdAt DATETIME
+
+
+table information
+id PK
+locationID FK
+sensorID FK
+
+SELECT
+MIN(temp)
+
+
+1. SQL view
+2. potgresql cluster
+3. data backup
+4. how to lock object updating from 2 async request
+5. rate limit from application - handle 10 request
