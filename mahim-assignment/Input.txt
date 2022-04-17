@@ -1,0 +1,3 @@
+Standard Chartered Bank with interest rate 4 and compounding periods 3
+Brac Bank with interest rate 3 and compounding periods 4
+City Bank with interest rate 5 and compounding periods 6
