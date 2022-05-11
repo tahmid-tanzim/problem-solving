@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# https://app.codility.com/programmers/lessons/3-time_complexity/
+# https://app.codility.com/programmers/lessons/3-time_complexity/frog_jmp/
 # from typing import List
 
 """
@@ -83,7 +83,6 @@ if __name__ == '__main__':
     test_passed = 0
     for idx, val in enumerate(inputs):
         output = findFrogJmp(val["X"], val["Y"], val["D"])
-        print(output)
         if output == val['expected']:
             print(f"{idx}. CORRECT Answer\nOutput:   {output}\nExpected: {val['expected']}\n")
             test_passed += 1

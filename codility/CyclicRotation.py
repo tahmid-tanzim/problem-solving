@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# https://app.codility.com/programmers/lessons/2-arrays/
+# https://app.codility.com/programmers/lessons/2-arrays/cyclic_rotation/
 from typing import List
 
 """
@@ -42,6 +42,7 @@ N and K are integers within the range [0..100];
 each element of array A is an integer within the range [−1,000..1,000].
 In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
 """
+
 
 # O(n*K), n is the length of A
 def findCyclicRotation(A: List[int], K: int):
