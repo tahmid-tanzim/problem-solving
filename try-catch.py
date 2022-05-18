@@ -16,4 +16,3 @@ while True:
     except ZeroDivisionError:
         print("Opps, you entered zero.")
     print("Please, try again.\n")
-
