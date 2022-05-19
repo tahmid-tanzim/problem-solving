@@ -18,10 +18,13 @@ class Solution:
         for prerequisiteCourse in self.adjacencyList[courseIdx]:
             if not visited[prerequisiteCourse]:
                 if self.isCyclicGraph(prerequisiteCourse, visited, recursionStack):
+                    # cycle found
                     return True
             elif recursionStack[prerequisiteCourse]:
+                # visited previously - cycle found
                 return True
 
+        # No cycle found - return to parent call stack
         recursionStack[courseIdx] = False
         return False
 
@@ -31,8 +34,8 @@ class Solution:
         for courseNumber, prerequisiteCourseNumber in prerequisites:
             self.adjacencyList[courseNumber].append(prerequisiteCourseNumber)
 
-        visited = [False for _ in range(numCourses)]  # Overall visited
-        recursionStack = [False for _ in range(numCourses)]  # used only inside DFS
+        visited = [False for _ in range(numCourses)]  # visited list works as memoization
+        recursionStack = [False for _ in range(numCourses)]  # used only inside DFS to check cycle
 
         # DFS, depth first search
         for course in range(numCourses):
