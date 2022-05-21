@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     random_list = []
     for i in range(0, 100):
-        n = random.randint(1, 1000000)
+        n = random.num(1, 1000000)
         random_list.append(n)
     print(random_list)
 
