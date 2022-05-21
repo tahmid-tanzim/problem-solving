@@ -34,6 +34,37 @@ class MedianFinder:
         return (-1 * self.small[0] + self.large[0]) / 2
 
 
+class MedianFinder2:
+
+    def __init__(self):
+        self.left = []     # Max Heap
+        self.right = []     # Min Heap
+
+    def addNum(self, num: int) -> None:
+        heapq.heappush(self.left, -1 * num)
+
+        # Make sure every num left is <= every num in right
+        if self.left and self.right and (-1 * self.left[0]) > self.right[0]:
+            val = -1 * heapq.heappop(self.left)
+            heapq.heappush(self.right, val)
+
+        # uneven size check
+        if len(self.left) > len(self.right) + 1:
+            val = -1 * heapq.heappop(self.left)
+            heapq.heappush(self.right, val)
+        if len(self.right) > len(self.left) + 1:
+            val = heapq.heappop(self.right)
+            heapq.heappush(self.left, -1 * val)
+
+    def findMedian(self) -> float:
+        if len(self.left) > len(self.right):
+            return -1 * self.left[0]
+        if len(self.left) < len(self.right):
+            return self.right[0]
+
+        return (-1 * self.left[0] + self.right[0]) / 2
+
+
 if __name__ == "__main__":
     inputs = (
         {
@@ -51,7 +82,7 @@ if __name__ == "__main__":
         },
     )
 
-    obj = MedianFinder()
+    obj = MedianFinder2()
     obj.addNum(1)
     param_2 = obj.findMedian()
     print(param_2)
