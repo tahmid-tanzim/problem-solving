@@ -20,7 +20,7 @@ def findTapeEquilibrium(A: List[int]):
         absolute_diff = abs(left_sum - right_sum)
         if min_diff is None or absolute_diff < min_diff:
             min_diff = absolute_diff
-        
+
     return min_diff
 
 
