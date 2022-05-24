@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 # https://www.algoexpert.io/questions/LRU%20Cache
+from typing import List
+from collections import OrderedDict
+
 """
 Implement an LRUCache class for a Least Recently Used (LRU)
 cache. The class should support:
