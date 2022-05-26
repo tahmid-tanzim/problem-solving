@@ -4,7 +4,6 @@ Dijkstra's Algorithm
 
 Single-Source - Shortest Path (SSSP)
 Greedy Method
-Time complexity - O(n^2)
 Remarks - Dijkstra's algorithm may NOT work for negative weight edges
 """
 import sys
@@ -27,23 +26,40 @@ class Graph:
                 self.adjacencyList[destinationVertex].append([sourceVertex, edgeWeight])
 
     def calculateShortestPath(self, startVertex: str, vertices: Tuple) -> dict:
-        # Initialize Vertex Distance
-        distance = {vertex: sys.maxsize for vertex in vertices}
-        distance[startVertex] = 0
+        """
+        Time Complexity - O(n^2)
+        Space Complexity - O(n)
+        """
+        minDistance = {}
+        shortestPath = {}
+        visited = {}
 
-        # Initialize Vertex Visited
-        visited = {vertex: False for vertex in vertices}
+        for v in vertices:
+            minDistance[v] = sys.maxsize
+            shortestPath[v] = ""
+            visited[v] = False
+
+        minDistance[startVertex] = 0
 
         n = len(vertices)
         while n > 0:
-            fromVertex = min(distance, key=lambda v: distance[v] if not visited[v] else sys.maxsize)
+            fromVertex = min(minDistance, key=lambda x: minDistance[x] if not visited[x] else sys.maxsize)
             visited[fromVertex] = True
 
             for toVertex, edgeWeight in self.adjacencyList[fromVertex]:
-                if not visited[toVertex] and distance[fromVertex] + edgeWeight < distance[toVertex]:
-                    distance[toVertex] = distance[fromVertex] + edgeWeight
+                if not visited[toVertex] and minDistance[fromVertex] + edgeWeight < minDistance[toVertex]:
+                    minDistance[toVertex] = minDistance[fromVertex] + edgeWeight
+                    shortestPath[toVertex] = shortestPath[fromVertex][:-1] + fromVertex + toVertex
             n -= 1
-        return distance
+
+        shortestPathWithDistance = {
+            v: dict(
+                distance=minDistance[v],
+                path=shortestPath[v]
+            )
+            for v in vertices
+        }
+        return shortestPathWithDistance
 
 
 if __name__ == "__main__":
@@ -104,15 +120,11 @@ if __name__ == "__main__":
         },
     )
 
-    test_passed = 0
     for idx, val in enumerate(inputs):
         graph_obj = Graph(val["vertices"], val["edges"], val["type"])
         output = graph_obj.calculateShortestPath(val["start_vertex"], val["vertices"])
-        print(output)
-        # if output == val['expected']:
-        #     print(f"{idx}. CORRECT Answer\nOutput:   {output}\nExpected: {val['expected']}\n")
-        #     test_passed += 1
-        # else:
-        #     print(f"{idx}. WRONG Answer\nOutput:{output}\nExpected:{val['expected']}\n")
+        print(f"{idx}.", "\n{")
+        for key, value in output.items():
+            print(f"\t{key}: {value},")
+        print("}\n")
 
-    print(f"Passed: {test_passed:3}/{idx + 1}\n")
