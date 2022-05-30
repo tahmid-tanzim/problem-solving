@@ -30,9 +30,7 @@ class Graph:
         Time Complexity - O(n^2)
         Space Complexity - O(n)
         """
-        minDistance = {}
-        shortestPath = {}
-        visited = {}
+        minDistance, shortestPath, visited = {}, {}, {}
 
         for v in vertices:
             minDistance[v] = sys.maxsize
@@ -41,7 +39,7 @@ class Graph:
 
         minDistance[startVertex] = 0
 
-        n = len(vertices)
+        n = len(vertices) - 1
         while n > 0:
             fromVertex = min(minDistance, key=lambda x: minDistance[x] if not visited[x] else sys.maxsize)
             visited[fromVertex] = True
