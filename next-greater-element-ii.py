@@ -24,6 +24,24 @@ def nextGreaterElements(nums: List[int]) -> List[int]:
     return result
 
 
+# Time O(n)
+# Space O(1)
+def nextGreaterElements2(nums: List[int]) -> List[int]:
+    n = len(nums)
+    result = [-1] * n
+    stack = []
+
+    for i in range(n * 2):
+        num = nums[i % n]
+        while len(stack) > 0 and num > nums[stack[-1]]:
+            index = stack.pop()
+            result[index] = num
+        if i < n:
+            stack.append(i)
+
+    return result
+
+
 if __name__ == '__main__':
     inputs = (
         {
@@ -38,7 +56,7 @@ if __name__ == '__main__':
 
     test_passed = 0
     for idx, val in enumerate(inputs):
-        output = nextGreaterElements(val["nums"])
+        output = nextGreaterElements2(val["nums"])
         if output == val['expected']:
             print(f"{idx}. CORRECT Answer\nOutput:   {output}\nExpected: {val['expected']}\n")
             test_passed += 1
