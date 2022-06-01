@@ -11,21 +11,21 @@ class Solution:
     def __init__(self):
         self.adjacencyList: List[List[int]] = list()
 
-    def isCyclicGraph(self, courseIdx: int, visited: List[bool], recursionStack: List[bool]) -> bool:
+    def isCyclicGraph(self, courseIdx: int, visited: List[bool], path: List[bool]) -> bool:
         visited[courseIdx] = True
-        recursionStack[courseIdx] = True
+        path[courseIdx] = True
 
         for prerequisiteCourse in self.adjacencyList[courseIdx]:
             if not visited[prerequisiteCourse]:
-                if self.isCyclicGraph(prerequisiteCourse, visited, recursionStack):
+                if self.isCyclicGraph(prerequisiteCourse, visited, path):
                     # cycle found
                     return True
-            elif recursionStack[prerequisiteCourse]:
+            elif path[prerequisiteCourse]:
                 # visited previously - cycle found
                 return True
 
         # No cycle found - return to parent call stack
-        recursionStack[courseIdx] = False
+        path[courseIdx] = False
         return False
 
     # Cycle in directed Graph
@@ -35,12 +35,12 @@ class Solution:
             self.adjacencyList[courseNumber].append(prerequisiteCourseNumber)
 
         visited = [False for _ in range(numCourses)]  # visited list works as memoization
-        recursionStack = [False for _ in range(numCourses)]  # used only inside DFS to check cycle
+        path = [False for _ in range(numCourses)]  # used only inside DFS to check cycle
 
         # DFS, depth first search
         for course in range(numCourses):
             if not visited[course]:
-                if self.isCyclicGraph(course, visited, recursionStack):
+                if self.isCyclicGraph(course, visited, path):
                     return False
         return True
 
