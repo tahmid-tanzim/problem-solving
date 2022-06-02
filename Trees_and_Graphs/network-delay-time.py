@@ -4,33 +4,32 @@ from typing import List
 import heapq
 
 
-class Solution:
-    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        adjacencyList = []
-        visited = []
+def networkDelayTime(times: List[List[int]], n: int, k: int) -> int:
+    adjacencyList = []
+    visited = []
 
-        for i in range(n):
-            adjacencyList.append([])
-            visited.append(False)
+    for i in range(n):
+        adjacencyList.append([])
+        visited.append(False)
 
-        for u, v, w in times:
-            # {fromNode: [(toNode, cost,)]}
-            adjacencyList[u - 1].append((v - 1, w,))
+    for u, v, w in times:
+        # {fromNode: [(toNode, cost,)]}
+        adjacencyList[u - 1].append((v - 1, w,))
 
-        minHeap = [(0, k - 1)]  # (distance, node)
-        minDelayTime = 0
-        while len(minHeap) > 0:
-            accumulatedTime, selectedNode = heapq.heappop(minHeap)
-            if visited[selectedNode]:
-                continue
+    minHeap = [(0, k - 1,)]  # (distance, node)
+    minDelayTime = 0
+    while len(minHeap) > 0:
+        accumulatedTime, selectedNode = heapq.heappop(minHeap)
+        if visited[selectedNode]:
+            continue
 
-            visited[selectedNode] = True
-            minDelayTime = max(minDelayTime, accumulatedTime)
-            for neighbourNode, edgeTime in adjacencyList[selectedNode]:
-                if not visited[neighbourNode]:
-                    heapq.heappush(minHeap, (edgeTime + accumulatedTime, neighbourNode))
+        visited[selectedNode] = True
+        minDelayTime = max(minDelayTime, accumulatedTime)
+        for neighbourNode, edgeTime in adjacencyList[selectedNode]:
+            if not visited[neighbourNode]:
+                heapq.heappush(minHeap, (edgeTime + accumulatedTime, neighbourNode,))
 
-        return minDelayTime if visited.count(True) == n else -1
+    return minDelayTime if visited.count(True) == n else -1
 
 
 if __name__ == "__main__":
@@ -73,10 +72,9 @@ if __name__ == "__main__":
         },
     )
 
-    obj = Solution()
     test_passed = 0
     for idx, val in enumerate(inputs):
-        output = obj.networkDelayTime(val["times"], val["n"], val["k"])
+        output = networkDelayTime(val["times"], val["n"], val["k"])
         if output == val['expected']:
             print(f"{idx}. CORRECT Answer\nOutput:   {output}\nExpected: {val['expected']}\n")
             test_passed += 1
