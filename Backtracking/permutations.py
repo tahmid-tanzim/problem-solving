@@ -36,21 +36,21 @@ class Solution:
         self.dfs(nums, [])
         return self.result
 
+    # Time complexity O(n!)
     def permute2(self, nums: List[int]) -> List[List[int]]:
-        result = []
         n = len(nums)
         if n == 1:
             return [
                 nums[:]
             ]
 
+        result = []
         for i in range(n):
-            value = nums.pop(0)
-            items = self.permute2(nums)
+            value = nums[i]
+            items = self.permute2(nums[0:i] + nums[i + 1:n])
             for item in items:
                 item.append(value)
             result += items
-            nums.append(value)
         return result
 
 
