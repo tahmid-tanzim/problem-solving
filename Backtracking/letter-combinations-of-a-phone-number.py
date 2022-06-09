@@ -1,20 +1,6 @@
 #!/usr/bin/python3
 # https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 from typing import List
-"""
-hashtable = {
-    "2": ("a", "b", "c"),
-    "3": ("d", "e", "f"),
-}
-
-("23", i=0, '')
-
-("23", i=1, 'a') ("23", i=1, 'b') ("23", i=1, 'c')
-
-("23", i=2, 'ad') ("23", i=2, 'ae') ("23", i=2, 'af')
-("23", i=2, 'bd') ("23", i=2, 'be') ("23", i=2, 'bf')
-("23", i=2, 'cd') ("23", i=2, 'ce') ("23", i=2, 'cf')
-"""
 
 
 # Time Complexity O(4^n)
