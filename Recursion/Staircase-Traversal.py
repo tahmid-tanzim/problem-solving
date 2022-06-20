@@ -68,7 +68,7 @@ class Solution2:
 
 
 class Solution3:
-    # Sliding Window
+    # Sliding_Window
     # O(n) time | O(n) space
     @staticmethod
     def staircaseTraversal(height, maxSteps):
