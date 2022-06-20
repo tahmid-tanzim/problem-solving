@@ -3,6 +3,7 @@
 import time
 import heapq
 from typing import List
+from collections import deque
 from functools import wraps
 
 
@@ -42,10 +43,15 @@ class Solution2:
     # Time Complexity - O(n * log(k))
     @timeit
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        maxValues = []
-        for i in range(0, len(nums) - k + 1):
-            maxValues.append(max(nums[i:i + k]))
-        return maxValues
+        results = []
+        maxHeap = []  # [(val, idx)]
+        for endIdx in range(len(nums)):
+            while len(maxHeap) > 0 and maxHeap[0][1] <= endIdx - k:
+                heapq.heappop(maxHeap)  # discard max value from heap which is out of window
+            heapq.heappush(maxHeap, (-1 * nums[endIdx], endIdx,))
+            if endIdx >= k - 1:
+                results.append(-1 * maxHeap[0][0])
+        return results
 
 
 class Solution3:
@@ -53,7 +59,19 @@ class Solution3:
     # Time Complexity - O(n)
     @timeit
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        pass
+        results = []
+        Q = deque()
+        for i in range(len(nums)):
+            if i >= k and nums[i - k] == Q[0]:
+                Q.popleft()
+
+            while len(Q) > 0 and Q[-1] < nums[i]:
+                Q.pop()
+
+            Q.append(nums[i])
+            if i >= k - 1:
+                results.append(Q[0])
+        return results
 
 
 def load_inputs():
@@ -67,7 +85,7 @@ def load_inputs():
 if __name__ == "__main__":
     inputs = load_inputs()
 
-    obj = Solution1()
+    obj = Solution3()
     test_passed = 0
     for idx, val in enumerate(inputs):
         output = obj.maxSlidingWindow(val["nums"], val["k"])
