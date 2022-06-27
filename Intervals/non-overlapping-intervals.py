@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 # https://leetcode.com/problems/non-overlapping-intervals/
 from typing import List
-"""
-I have to find those intervals which overlaps maximum range
-"""
 
 
 class Solution1:
