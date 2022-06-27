@@ -5,7 +5,7 @@ from typing import List
 
 class Solution1:
     # Brute Force
-    # Time Complexity - O(n)
+    # Time Complexity - O(n log(n))
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         intervals.sort(key=lambda interval: interval[0])
         mergeList = []
