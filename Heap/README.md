@@ -1,5 +1,14 @@
 # Heap - Heap Sort - Heapify - Priority Queues
 
+```doctest
+Heap is special tree based data structure. The tree is a complete binary tree.
+
+There are 2 types of heap:
+    1. Max Heap
+    2. Min Heap
+```
+
+
 1. If a Node is at index ~> i
 2. Then left child is at index ~> 2i + 1
 3. Then right child is at index ~> 2i + 2
