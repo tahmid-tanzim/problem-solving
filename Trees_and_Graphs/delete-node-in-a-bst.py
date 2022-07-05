@@ -13,6 +13,34 @@ class TreeNode:
         return f"{self.val}"
 
 
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+    
+    def insert(self, val: int):
+        new_node = TreeNode(val=val)
+        if self.root is None:
+            self.root = new_node
+            return
+        
+        def add_node(current_node):
+            if val < current_node.val:
+                if current_node.left is None:
+                    current_node.left = new_node
+                    return 
+                else:
+                    add_node(current_node.left)
+            elif val >= current_node.val:
+                if current_node.right is None:
+                    current_node.right = new_node
+                    return 
+                else:
+                    add_node(current_node.right)
+        
+        add_node(self.root)
+        
+
+# Time Complexity - O(h). Where h is the height of BST
 class Solution1:
     def getMinValueNode(self, node: Optional[TreeNode]) -> Optional[TreeNode]:
         while node.left is not None:
@@ -56,25 +84,37 @@ class Solution1:
 def preorder(node: Optional[TreeNode]):
     if node is None:
         return
-    print(node)
+
     preorder(node.left)
     preorder(node.right)
+    print(node)
 
 
 if __name__ == "__main__":
-    tree1 = TreeNode(val=10)
-
-    tree1.left = TreeNode(
-        val=5,
-        left=TreeNode(val=3, left=TreeNode(val=1), right=TreeNode(val=4)),
-        right=TreeNode(val=8, left=TreeNode(val=6, left=None, right=TreeNode(7)), right=TreeNode(val=9))
-    )
-
-    tree1.right = TreeNode(
-        val=20,
-        left=TreeNode(val=15)
-    )
-
+    bst1 = BinarySearchTree()
+    bst1.insert(10)
+    bst1.insert(5)
+    bst1.insert(20)
+    bst1.insert(3)
+    bst1.insert(8)
+    bst1.insert(1)
+    bst1.insert(4)
+    bst1.insert(6)
+    bst1.insert(9)
+    bst1.insert(7)
+    bst1.insert(15)
+    tree1 = bst1.root
+    #################
+    bst2 = BinarySearchTree()
+    bst2.insert(5)
+    bst2.insert(3)
+    bst2.insert(6)
+    bst2.insert(7)
+    bst2.insert(2)
+    bst2.insert(4)
+    tree2 = bst2.root
+    #################
     obj = Solution1()
-    resultRootNode = obj.deleteNode(tree1, 10)
+    resultRootNode = obj.deleteNode(tree2, 3)
     preorder(resultRootNode)
+    
