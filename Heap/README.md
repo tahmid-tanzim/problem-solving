@@ -69,9 +69,11 @@ array = [10, 20, 15, 12, 40, 25, 18]
 ```
 For Max Heap, from last index to 0 check if children NOT exists then its considered as Heap. Else if children exists then adjust with children (shift down) until the sub tree is Max / Min Heap.
 
-
 ## 5. Priority Queue
 #### 5.1. If small number is higher priority 
 Then Create & Delete Min Heap
 #### 5.2. If large number is higher priority 
 Then Create & Delete Max Heap
+
+## 6. Kth Smallest ~> MAX Heap
+## 7. Kth Largest  ~> MIN Heap
