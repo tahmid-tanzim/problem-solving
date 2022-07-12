@@ -48,7 +48,24 @@ def findOneSubsequenceSum(array, idx, container, total):
     return False
 
 
+def findSubsequenceSumCount(array, idx, container, total):
+    if idx >= len(array):
+        if total == 0:
+            print(container)
+            return 1
+        return 0
+
+    container.append(array[idx])
+    total -= array[idx]
+    leftCount = findSubsequenceSumCount(array, idx + 1, container, total)
+    total += array[idx]
+    container.pop()
+    rightCount = findSubsequenceSumCount(array, idx + 1, container, total)
+    return leftCount + rightCount
+
+
 if __name__ == "__main__":
     # print(findSubsequence([3, 2, 1], 0, []))
     # print(findSubsequenceSum([1, 2, 1], 0, [], 2))
-    print(findOneSubsequenceSum([1, 2, 1], 0, [], 2))
+    # print(findOneSubsequenceSum([1, 2, 1], 0, [], 2))
+    print(findSubsequenceSumCount([1, 2, 1], 0, [], 2))
