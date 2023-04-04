@@ -71,3 +71,28 @@ $ pip freeze > requirements.txt
 $ pip install -r requirements.txt
 $ deactivate
 ```
+### 14. SQL Group by time
+Hourly Group By
+```sql
+SELECT
+    restaurant,
+    DATE_TRUNC('hour', payment_time) AT TIME ZONE 'America/New_York' AS payment_datetime,
+    COUNT(id) AS total
+FROM
+    payments
+WHERE payment_time AT TIME ZONE 'America/New_York' BETWEEN '2023-04-03 00:00:00' AND '2023-04-03 23:59:59'
+AND restaurant IN ('tim_hortons','mcdonalds','kfc')
+GROUP BY restaurant, payment_datetime;
+```
+
+15 Minutes Group By
+```sql
+SELECT
+    restaurant,
+    TO_TIMESTAMP(FLOOR((EXTRACT('epoch' FROM payment_time) / 900 )) * 900) AT TIME ZONE 'America/New_York' AS payment_datetime,
+    COUNT(id) AS total
+FROM
+    payments
+WHERE payment_time AT TIME ZONE 'America/New_York' BETWEEN '2023-04-03 00:00:00' AND '2023-04-03 23:59:59'
+AND restaurant IN ('tim_hortons','mcdonalds','kfc')
+GROUP BY restaurant, payment_datetime;```
