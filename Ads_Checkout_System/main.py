@@ -10,23 +10,24 @@ class Ads:
     def get_price(self):
         return self.price
 
-# class ClassicAds(Ads):
-#     def __init__(self, _id: str, _name: str = '', _price: float = 0):
-#         super().__init__(_id, _name, _price)
-#         self.feature = 'Offers the most basic level of advertisement'
-#
-#
-# class StandoutAds(Ads):
-#     def __init__(self, _id: str, _name: str = '', _price: float = 0):
-#         super().__init__(_id, _name, _price)
-#         self.feature = 'Allows advertisers to use a company logo and use a longer presentation text'
-#
-#
-# class PremiumAds(Ads):
-#     def __init__(self, _id: str, _name: str = '', _price: float = 0):
-#         super().__init__(_id, _name, _price)
-#         self.feature = 'Same benefits as Standout Ad, but also puts the advertisement at the top of the results,
-#         allowing higher visibility'
+
+class ClassicAds(Ads):
+    def __init__(self, _id: str, _name: str = '', _price: float = 0):
+        super().__init__(_id, _name, _price)
+        self.feature = 'Offers the most basic level of advertisement'
+
+
+class StandoutAds(Ads):
+    def __init__(self, _id: str, _name: str = '', _price: float = 0):
+        super().__init__(_id, _name, _price)
+        self.feature = 'Allows advertisers to use a company logo and use a longer presentation text'
+
+
+class PremiumAds(Ads):
+    def __init__(self, _id: str, _name: str = '', _price: float = 0):
+        super().__init__(_id, _name, _price)
+        self.feature = '''Same benefits as Standout Ad, but also puts the advertisement at the top of the results,
+        allowing higher visibility'''
 
 
 class Offer:
@@ -45,7 +46,14 @@ class PricingRules:
         self.offers = {}
 
     def create_new_ads(self, ads_id: str, name: str, price: float):
-        self.inventory[ads_id] = Ads(ads_id, name, price)
+        if ads_id == 'classic':
+            self.inventory[ads_id] = ClassicAds(ads_id, name, price)
+        elif ads_id == 'standout':
+            self.inventory[ads_id] = StandoutAds(ads_id, name, price)
+        elif ads_id == 'premium':
+            self.inventory[ads_id] = PremiumAds(ads_id, name, price)
+        else:
+            self.inventory[ads_id] = Ads(ads_id, name, price)
 
     def create_new_offer(self, customer: str, ads_id: str, offer: dict):
         if customer not in self.offers:
