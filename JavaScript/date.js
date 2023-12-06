@@ -17,16 +17,14 @@ const getDateRangeLabel = (fromDate, toDate, showSingleDate = false) => {
     return startDateString + ' - ' + endDateString;
 };
 
-// const {fromDate, toDate} = getDateXDaysAgo(7);
-// console.log(fromDate, toDate);
-// const l = getDateRangeLabel(fromDate, toDate);
-// console.log(l)
-
-const calculateChartsDateRanges = (comparison, showSingleDate = false) => {
+const calculateChartsDateRanges = (comparison, currentDate, showSingleDate = false) => {
     const dateRanges = [];
-    let endDate = new Date();
+    let startDate;
+    let endDate = new Date(currentDate).toLocaleString('en-US', {timeZone: 'America/Los_Angeles' });
+    endDate = new Date(endDate);
+    endDate.setHours(endDate.getHours() - 6);
     for (let i = 0; i < comparison.xAxisTotalNumberOfDurations; i++) {
-        let startDate = new Date(endDate.getTime());
+        startDate = new Date(endDate.getTime());
         startDate.setDate(endDate.getDate() - comparison.xAxisSingleDurationInDays + 1);
         startDate.setUTCHours(0, 0, 0, 0);
         endDate.setUTCHours(23, 59, 59, 999);
@@ -47,11 +45,49 @@ const calculateChartsDateRanges = (comparison, showSingleDate = false) => {
 * xAxisTotalNumberOfDurations: No of x-axis points
 * */
 
+// const currentDate = new Date(2023, 0, 2, 12, 0, 0);
+// console.log(calculateChartsDateRanges({
+//     xAxisSingleDurationInDays: 7,
+//     xAxisTotalNumberOfDurations: 3,
 //
-console.log(calculateChartsDateRanges({
-    xAxisSingleDurationInDays: 1,
-    xAxisTotalNumberOfDurations: 7,
+// }, currentDate, false));
 
-}, true));
+// const testDate = new Date().toLocaleString('en-US', {timeZone: 'America/Los_Angeles' });
+// console.log(typeof testDate, testDate);
+// const testDate2 = new Date(testDate);
+// console.log('Before: ', testDate2);
+// testDate2.setHours(testDate2.getHours() - 6);
+// console.log('After: ', testDate2);
 
-console.log(new Date());
+const calculateRate = (type, total) => {
+    let nominator = 0;
+    let denominator = 0;
+    const {approval, decline, failure, conflict} = total;
+    switch (type) {
+        case 'APPROVAL':
+            nominator = approval;
+            denominator = approval + decline;
+            break;
+        case 'CHECKOUT':
+            nominator = approval;
+            denominator = approval + decline + failure + conflict;
+            break;
+        case 'CONVERSION':
+            nominator = approval + decline + conflict;
+            denominator = approval + decline + failure + conflict;
+            break;
+        default:
+            return 0;
+    }
+    return denominator ? nominator / denominator * 100 : 0;
+};
+
+const type = 'APPROVAL';
+const total = {
+    approval: 0,
+    decline: 0,
+    failure: 0,
+    conflict: 0
+};
+
+console.log(calculateRate(type, total));
