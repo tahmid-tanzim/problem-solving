@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>JavaScript Interval Test</h1>
+
+<script>
+    let intervalID = 1;
+    const init = (isAudio) => {
+       setInterval(() => {
+        const audioMessage = isAudio ? 'Audio Message Found' : 'Event Message Found'
+        console.log('Interval - ', audioMessage, intervalID++, Date.now());
+        }, 1000);
+    }
+
+    init(true);
+    init(false);
+</script>
+
+<p>Test</p>
+
+</body>
+</html> 
