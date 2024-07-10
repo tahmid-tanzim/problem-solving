@@ -28,19 +28,32 @@ def power(a, b):
     return a ** b
 
 
-@timeit
-async def say_after(delay, what):
-    await asyncio.sleep(delay)
-    print(what)
+async def factorial(name, number):
+    f = 1
+    for i in range(2, number + 1):
+        print(f"Task {name}: Compute factorial({number}), currently i={i}...")
+        await asyncio.sleep(1)
+        f *= i
+    print(f"Task {name}: factorial({number}) = {f}")
+    return f
 
 
-@timeit
 async def main():
-    async with asyncio.TaskGroup() as tg:
-        tg.create_task(say_after(3, 'hello'))
-        tg.create_task(say_after(2, 'world'))
-        print(f"started at {time.strftime('%X')}")
-    print(f"finished at {time.strftime('%X')}")
+    background_task = [
+        factorial("A", 2),
+        factorial("B", 3),
+        factorial("C", 4),
+    ]
+    # Schedule three calls *concurrently*:
+    # L = await asyncio.gather(
+    #     factorial("A", 2),
+    #     factorial("B", 3),
+    #     factorial("C", 4),
+    # )
+    L = await asyncio.gather(
+        *background_task
+    )
+    print(L)
 
 
 if __name__ == "__main__":
