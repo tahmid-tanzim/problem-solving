@@ -26,3 +26,5 @@ binary-tree-longest-consecutive-sequence.py
 number-of-longest-increasing-subsequence.py
 json-parse/*.json
 PostgreSQL/data/*
+
+TaskRetry/env
