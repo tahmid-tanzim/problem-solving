@@ -20,47 +20,6 @@ discard_modifiers_for_plain_item = {
     ]
 }
 
-"""
-Bypass adding cheese & lettuce modifier to the plain item
-"""
-"""
-def sanitize_plain_modifiers(cart):
-    updated_cart = list()
-    plain_mod_index_list = list()
-    for i in range(len(cart)):
-        updated_cart.append(cart[i])
-        if "- plain" in cart[i].lower():
-            plain_mod_index_list.append(i)
-    
-    if len(plain_mod_index_list) == 0:
-        return cart
-
-    for i in plain_mod_index_list:
-        j = i - 1
-        while j >= 0:
-            if re.match("^- ([0-9]+)( |x)", cart[j], re.IGNORECASE):
-                plain_item = cart[j]
-                if any(
-                        item_name
-                        for item_name in discard_modifiers_for_plain_item['item_names']
-                        if item_name in plain_item.lower()
-                ):
-                    print('\n\nParent Item', plain_item, j)
-                    print('Corresponding Plain Item', cart[i], i)
-                    for k in range(j + 1, len(cart)):
-                        if re.match("^- ([0-9]+)( |x)", cart[k], re.IGNORECASE):
-                            break
-                        print('\t child mods:', cart[k], k)
-                        for modifier in discard_modifiers_for_plain_item['modifiers']:
-                            if is_all_words_exist_in_string(modifier, cart[k]):
-                                print('This Mod need to be deleted:', cart[k], k)
-                break
-            j -= 1
-    print('plain_index_list: ', plain_mod_index_list)
-
-    return cart
-"""
-
 
 def sanitize_plain_modifiers(cart):
     """
