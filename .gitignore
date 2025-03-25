@@ -28,3 +28,4 @@ json-parse/*.json
 PostgreSQL/data/*
 
 TaskRetry/env
+tracing-profiler/venv
